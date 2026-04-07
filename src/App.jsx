@@ -206,7 +206,7 @@ const App = () => {
       <div style={st.splashContent}>
         <div style={st.splashIcon}>&#10013;</div>
         <div style={st.splashTitle}>Farní Dar</div>
-        <div style={st.splashSub}>Podpořte svou farnost jednoduše</div>
+        <div style={st.splashSub}>Podpořte svou farnost platbou z mobilu.</div>
         <div style={st.splashLoader}><div style={st.splashLoaderBar} /></div>
       </div>
     </div>
