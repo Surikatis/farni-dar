@@ -250,7 +250,7 @@ const App = () => {
         </div>
         {activeTab === "dar" ? (
           <div style={st.donateSection}>
-            <p style={st.donateLabel}>Vyberte částku:</p>
+            <p style={st.donateLabel}>Potvrďte částku:</p>
             <div style={st.amountGrid}>
               {amounts.map(a => (
                 <button key={a} onClick={() => { setSelectedAmount(a); setCustomAmount(""); }}
@@ -270,7 +270,7 @@ const App = () => {
             </div>
             <button onClick={handleDonate} disabled={finalAmount <= 0}
               style={{ ...st.donateBtn, ...(finalAmount <= 0 ? st.donateBtnOff : {}) }}>
-              {finalAmount > 0 ? `Darovat ${finalAmount} Kč` : "Vyberte částku"}
+              {finalAmount > 0 ? `Darovat ${finalAmount} Kč` : "Potvrďte částku"}
             </button>
            
             <div style={st.paymentRefBox}>
