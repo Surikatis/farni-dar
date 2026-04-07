@@ -272,7 +272,7 @@ const App = () => {
               style={{ ...st.donateBtn, ...(finalAmount <= 0 ? st.donateBtnOff : {}) }}>
               {finalAmount > 0 ? `Darovat ${finalAmount} Kč` : "Vyberte částku"}
             </button>
-            </div>
+           
             <div style={st.paymentRefBox}>
    <span style={st.paymentRefLabel}>Reference platby:</span>
    <span style={st.paymentRefValue}>{getPaymentRef(selectedChurch)}</span>
