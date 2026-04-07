@@ -312,7 +312,7 @@ const App = () => {
         <div style={st.homeHeader}>
           <div style={st.logo}>&#10013;</div>
           <h1 style={st.homeTitle}>Farní Dar</h1>
-          <p style={st.homeSub}>Podpořte svou farnost jednoduše – odkudkoliv, kdykoliv.</p>
+          <p style={st.homeSub}>Podpořte svou farnost platbou z mobilu.</p>
           <p style={{fontSize: 12, color: c.soft, marginTop: 4, padding: "0 24px"}}>
             Najděte svůj kostel a přispějte pár kliknutími místo hotovosti.
           </p>
