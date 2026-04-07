@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { allChurches } from "./churches.js";
 
 const allChurches = [
   { id:1, name:"Katedrála sv. Víta", city:"Praha", address:"III. nádvoří 48/2, Hradčany", lat:50.0909, lng:14.4006, diocese:"Arcidiecéze pražská", masses:["Ne 10:00","Ne 18:00","St 18:00"], pastor:"Mons. Jan Balík", phone:"+420 224 372 434" },
@@ -81,6 +82,9 @@ Potom vstoupil i ten druhý učedník, který přišel ke hrobu první, viděl a
     }
   ]
 };
+function getPaymentRef(church) {
+  return `DAR-${String(church.id).padStart(4, "0")}`;
+  }
 
 const amounts = [50, 100, 200, 500];
 
@@ -291,7 +295,12 @@ const App = () => {
               style={{ ...st.donateBtn, ...(finalAmount <= 0 ? st.donateBtnOff : {}) }}>
               {finalAmount > 0 ? `Darovat ${finalAmount} Kč` : "Vyberte částku"}
             </button>
-            <p style={st.donateNote}>Zabezpečená platba &middot; Prototyp - platba není reálná</p>
+           // <div style={st.paymentRefBox}>
+   <span style={st.paymentRefLabel}>Reference platby:</span>
+   <span style={st.paymentRefValue}>{getPaymentRef(selectedChurch)}</span>
+   <span style={st.paymentRefSub}>— {selectedChurch.name}</span>
+ </div>
+ <p style={st.donateNote}>Zabezpečená platba · Prototyp – platba není reálná</p>
           </div>
         ) : (
           <div style={st.infoSection}>
@@ -527,6 +536,11 @@ const st = {
   infoIcon: { fontSize: 22, flexShrink: 0, marginTop: 2 },
   infoLabel: { fontSize: 11, color: c.soft, marginBottom: 2, textTransform: "uppercase", letterSpacing: 0.5 },
   infoVal: { fontSize: 14, color: c.text, fontWeight: 500 },
+   paymentRefBox: { background: c.goldL, borderRadius: 10, padding: "10px 14px", marginBottom: 12, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 6 },
+  paymentRefLabel: { fontSize: 11, color: c.soft, textTransform: "uppercase", letterSpacing: 0.5 },
+  paymentRefValue: { fontSize: 13, fontWeight: 700, color: c.goldD, fontFamily: "monospace" },
+  paymentRefSub: { fontSize: 12, color: c.soft, fontStyle: "italic" },
+};
 };
 
 export default App;
