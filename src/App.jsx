@@ -518,6 +518,5 @@ const st = {
   paymentRefValue: { fontSize: 13, fontWeight: 700, color: c.goldD, fontFamily: "monospace" },
   paymentRefSub: { fontSize: 12, color: c.soft, fontStyle: "italic" },
 };
-};
 
 export default App;
