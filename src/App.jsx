@@ -312,12 +312,12 @@ const App = () => {
         <div style={st.homeHeader}>
           <div style={st.logo}>&#10013;</div>
           <h1 style={st.homeTitle}>Farní Dar</h1>
-          <p style={st.homeSub}>Podpořte svou farnost jednoduše – odkudkoliv, kdykoliv.</p>
+          <p style={st.homeSub}>Podpořte svou farnost platbou z mobilu.</p>
           <p style={{fontSize: 12, color: c.soft, marginTop: 4, padding: "0 24px"}}>
-            Najděte svůj kostel a přispějte pár kliknutími místo hotovosti.
+            Počet farností se postupně rozšiřuje.
           </p>
           <p style={{fontSize: 11, color: c.soft, marginTop: 6, opacity: 0.7}}>
-            {locStatus === "found" ? "📍 Kostely ve vašem okolí" : locStatus === "default" ? "Zobrazuji kostely (poloha nepřístupná)" : "Zjišťuji polohu..."}
+            {locStatus === "found" ? : locStatus === "default" ? "Zobrazuji kostely (poloha nepřístupná)" : "Zjišťuji polohu..."}
           </p>
         </div>
         <div style={st.bottomNav}>
