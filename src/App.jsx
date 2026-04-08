@@ -1,67 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { allChurches } from "./churches.js";
 
-const liturgy = {
-  title: "Slavnost Zmrtvýchvstání Páně",
-  subtitle: "Boží hod velikonoční - Cyklus A",
-  date: "5. dubna 2026",
-  colorName: "bílá",
-  sourceUrl: "https://www.vira.cz/zmrtvychvstani-pane-cyklus-a-1.html",
-  sections: [
-    {
-      type: "1. čtení",
-      ref: "Sk 10,34a.37-43",
-      intro: "Petr v domě setníka Kornélia shrnuje Ježíšovo působení a zdůrazňuje jeho vzkříšení.",
-      text: `Petr se ujal slova a promluvil: \u201EVy víte, co se po křtu, který hlásal Jan, událo nejdříve v Galileji a potom po celém Judsku: Jak Bůh pomazal Duchem Svatým a mocí Ježíše z Nazareta, jak on všude procházel, prokazoval dobrodiní, a protože Bůh byl s ním, uzdravoval všechny, které opanoval ďábel.
-
-A my jsme svědky všeho toho, co konal v Judsku a v Jeruzalémě. Ale pověsili ho na dřevo a zabili. Bůh jej však třetího dne vzkřísil a dal mu, aby se viditelně ukázal, ne všemu lidu, ale jen těm, které Bůh předem vyvolil za svědky, totiž nám, kteří jsme s ním jedli a pili po jeho zmrtvýchvstání.
-
-On nám přikázal, abychom hlásali lidu a se vší rozhodností dosvědčovali: To je Bohem ustanovený soudce nad živými i mrtvými. O něm vydávají svědectví všichni proroci, že skrze něho dostane odpuštění hříchů každý, kdo v něho věří.\u201C`
-    },
-    {
-      type: "Žalm",
-      ref: "Žl 118,1-2.16ab+17.22-23",
-      intro: "I to, co druzí zavrhnou, může Bůh proměnit v základní kámen našeho života.",
-      text: `Odpověď: Toto je den, který učinil Hospodin, jásejme a radujme se z něho!
-
-Oslavujte Hospodina, neboť je dobrý,
-jeho milosrdenství trvá navěky.
-Nechť řekne dům Izraelův:
-\u201EJeho milosrdenství trvá na věky.\u201C
-
-Hospodinova pravice mocně zasáhla,
-Hospodinova pravice mě pozvedla.
-Nezemřu, ale budu žít
-a vypravovat o Hospodinových činech.
-
-Kámen, který stavitelé zavrhli,
-stal se kvádrem nárožním.
-Hospodinovým řízením se tak stalo,
-je to podivuhodné v našich očích.`
-    },
-    {
-      type: "2. čtení",
-      ref: "Kol 3,1-4",
-      intro: "Pavel hlásá, že skrze křest jsme byli vzkříšeni spolu s Kristem.",
-      text: `Bratři! Když jste s Kristem byli vzkříšeni, usilujte o to, co pochází shůry, kde je Kristus po Boží pravici. Na to myslete, co pochází shůry, ne na to, co je na zemi. Jste přece už mrtví a váš život je s Kristem skrytý v Bohu. Ale až se ukáže Kristus, náš život, potom se i vy s ním ukážete ve slávě.`
-    },
-    {
-      type: "Evangelium",
-      ref: "Jan 20,1-9",
-      intro: "Marie Magdalská vidí jen prázdný hrob, ale Jan a Petr nacházejí pečlivě složená plátna.",
-      text: `Prvního dne v týdnu přišla Marie Magdalská časně ráno ještě za tmy ke hrobu a viděla, že je kámen od hrobu odstraněn. Běžela proto k Šimonu Petrovi a k tomu druhému učedníkovi, kterého Ježíš miloval, a řekla jim: \u201EVzali Pána z hrobu a nevíme, kam ho položili.\u201C
-
-Petr a ten druhý učedník tedy vyšli a zamířili ke hrobu. Oba běželi zároveň, ale ten druhý učedník byl rychlejší než Petr a doběhl k hrobu první. Naklonil se dovnitř a viděl, že tam leží pruhy plátna, ale dovnitř nevešel.
-
-Pak za ním přišel i Šimon Petr, vešel do hrobky a viděl, že tam leží pruhy plátna. Rouška však, která byla na Ježíšově hlavě, neležela u těch pruhů plátna, ale složená zvlášť na jiném místě.
-
-Potom vstoupil i ten druhý učedník, který přišel ke hrobu první, viděl a uvěřil. Ještě totiž nerozuměli Písmu, že Ježíš musí vstát z mrtvých.`
-    }
-  ]
-};
 function getPaymentRef(church) {
   return `DAR-${String(church.id).padStart(4, "0")}`;
-  }
+}
 
 const amounts = [50, 100, 200, 500];
 
@@ -89,24 +31,42 @@ const App = () => {
   const [activeTab, setActiveTab] = useState("dar");
   const [animateIn, setAnimateIn] = useState(false);
   const [userLoc, setUserLoc] = useState(null);
-  const [locStatus, setLocStatus] = useState("loading");
   const [viewMode, setViewMode] = useState("list");
   const [expandedReading, setExpandedReading] = useState(null);
   const [mainTab, setMainTab] = useState("kostely");
+  const [liturgy, setLiturgy] = useState(null);
+  const [liturgyLoading, setLiturgyLoading] = useState(true);
+  const [liturgyError, setLiturgyError] = useState(false);
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markersRef = useRef([]);
 
   useEffect(() => {
+    fetch("/api/liturgie")
+      .then(r => r.json())
+      .then(data => {
+        if (data.sections?.length > 0) {
+          setLiturgy(data);
+        } else {
+          setLiturgyError(true);
+        }
+        setLiturgyLoading(false);
+      })
+      .catch(() => {
+        setLiturgyError(true);
+        setLiturgyLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (p) => { setUserLoc({ lat: p.coords.latitude, lng: p.coords.longitude }); setLocStatus("found"); },
-        () => { setUserLoc({ lat: 50.176, lng: 14.867 }); setLocStatus("default"); },
+        (p) => setUserLoc({ lat: p.coords.latitude, lng: p.coords.longitude }),
+        () => setUserLoc({ lat: 50.176, lng: 14.867 }),
         { timeout: 8000 }
       );
     } else {
       setUserLoc({ lat: 50.176, lng: 14.867 });
-      setLocStatus("default");
     }
   }, []);
 
@@ -156,7 +116,7 @@ const App = () => {
       const ci = L.divIcon({ html: '<div style="width:30px;height:30px;background:#C8943E;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;font-size:15px">+</div>', iconSize: [30, 30], className: "" });
       filtered.slice(0, 15).forEach(ch => {
         const dist = ch.distance ? formatDist(ch.distance) : "";
-        const popup = '<div style="font-family:sans-serif;min-width:170px"><strong>' + ch.name + '</strong><br/><span style="color:#666;font-size:12px">' + ch.city + ' ' + dist + '</span><br/><button onclick="window.__selectChurch(' + ch.id + ')" style="margin-top:8px;padding:7px 16px;background:#C8943E;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600">Otevřít</button></div>';
+        const popup = '<div style="font-family:sans-serif;min-width:170px"><strong>' + ch.name + '</strong><br/><span style="color:#666;font-size:12px">' + ch.city + ' ' + dist + '</span><br/><button onclick="window.__selectChurch(' + ch.id + ')" style="margin-top:8px;padding:7px 16px;background:#C8943E;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600">Otevrit</button></div>';
         const m = L.marker([ch.lat, ch.lng], { icon: ci }).addTo(map).bindPopup(popup);
         markersRef.current.push(m);
       });
@@ -205,8 +165,8 @@ const App = () => {
     <div style={st.splashWrap}><style>{css}</style>
       <div style={st.splashContent}>
         <div style={st.splashIcon}>&#10013;</div>
-        <div style={st.splashTitle}>Farní Dar</div>
-        <div style={st.splashSub}>Podpořte svou farnost jednoduše</div>
+        <div style={st.splashTitle}>Farni Dar</div>
+        <div style={st.splashSub}>Podporte svou farnost jednoduse</div>
         <div style={st.splashLoader}><div style={st.splashLoaderBar} /></div>
       </div>
     </div>
@@ -215,11 +175,11 @@ const App = () => {
   if (showSuccess) return (
     <div style={st.successWrap}><style>{css}</style>
       <div style={{ fontSize: 64, marginBottom: 16, animation: "gentleFloat 3s ease-in-out infinite" }}>&#128330;&#65039;</div>
-      <div style={st.successTitle}>Děkujeme!</div>
-      <div style={st.successText}>Váš dar {finalAmount} Kč pro {selectedChurch?.name} byl přijat.</div>
+      <div style={st.successTitle}>Dekujeme!</div>
+      <div style={st.successText}>Vas dar {finalAmount} Kc pro {selectedChurch?.name} byl prijat.</div>
       <div style={st.successVerse}>
-        &bdquo;Každý ať dává podle toho, jak se ve svém srdci předem rozhodl.&ldquo;
-        <br /><span style={st.verseRef}>2. Korintským 9:7</span>
+        &bdquo;Kazdy at dava podle toho, jak se ve svem srdci predem rozhodl.&ldquo;
+        <br /><span style={st.verseRef}>2. Korintskym 9:7</span>
       </div>
     </div>
   );
@@ -228,7 +188,7 @@ const App = () => {
     <div style={st.app}><style>{css}</style>
       <div style={{ ...st.detailWrap, opacity: animateIn ? 1 : 0, transform: animateIn ? "translateY(0)" : "translateY(12px)", transition: "all .4s ease" }}>
         <div style={st.detailHeader}>
-          <button onClick={goHome} style={st.backBtn}>&#8592; Zpět</button>
+          <button onClick={goHome} style={st.backBtn}>&#8592; Zpet</button>
         </div>
         <div style={st.detailHero}>
           <div style={{ fontSize: 48, marginBottom: 10 }}>&#9962;</div>
@@ -244,50 +204,49 @@ const App = () => {
           {["dar", "info"].map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)}
               style={{ ...st.tab, ...(activeTab === tab ? st.tabActive : {}) }}>
-              {tab === "dar" ? "Přispět" : "O farnosti"}
+              {tab === "dar" ? "Prispet" : "O farnosti"}
             </button>
           ))}
         </div>
         {activeTab === "dar" ? (
           <div style={st.donateSection}>
-            <p style={st.donateLabel}>Potvrďte částku:</p>
+            <p style={st.donateLabel}>Vyberte castku:</p>
             <div style={st.amountGrid}>
               {amounts.map(a => (
                 <button key={a} onClick={() => { setSelectedAmount(a); setCustomAmount(""); }}
                   style={{ ...st.amountBtn, ...(selectedAmount === a ? st.amountBtnActive : {}) }}>
-                  {a} Kč
+                  {a} Kc
                 </button>
               ))}
             </div>
             <div style={st.customRow}>
-              <span style={st.customLabel}>Jiná částka:</span>
+              <span style={st.customLabel}>Jina castka:</span>
               <div style={st.customInputWrap}>
                 <input type="number" placeholder="0" value={customAmount}
                   onChange={e => { setCustomAmount(e.target.value); setSelectedAmount(null); }}
                   style={st.customInput} />
-                <span style={st.customCurr}>Kč</span>
+                <span style={st.customCurr}>Kc</span>
               </div>
             </div>
             <button onClick={handleDonate} disabled={finalAmount <= 0}
               style={{ ...st.donateBtn, ...(finalAmount <= 0 ? st.donateBtnOff : {}) }}>
-              {finalAmount > 0 ? `Darovat ${finalAmount} Kč` : "Potvrďte částku"}
+              {finalAmount > 0 ? `Darovat ${finalAmount} Kc` : "Vyberte castku"}
             </button>
-           
             <div style={st.paymentRefBox}>
-   <span style={st.paymentRefLabel}>Reference platby:</span>
-   <span style={st.paymentRefValue}>{getPaymentRef(selectedChurch)}</span>
-   <span style={st.paymentRefSub}>— {selectedChurch.name}</span>
- </div>
- <p style={st.donateNote}>Zabezpečená platba · Prototyp – platba není reálná</p>
+              <span style={st.paymentRefLabel}>Reference platby:</span>
+              <span style={st.paymentRefValue}>{getPaymentRef(selectedChurch)}</span>
+              <span style={st.paymentRefSub}>— {selectedChurch.name}</span>
+            </div>
+            <p style={st.donateNote}>Zabezpecena platba · Prototyp – platba neni realna</p>
           </div>
         ) : (
           <div style={st.infoSection}>
             {[
-              { icon: "\u{1F464}", label: "Farář", val: selectedChurch.pastor },
-              { icon: "\u{1F550}", label: "Bohoslužby", val: selectedChurch.masses },
+              { icon: "\u{1F464}", label: "Farar", val: selectedChurch.pastor },
+              { icon: "\u{1F550}", label: "Bohosluzby", val: selectedChurch.masses },
               { icon: "\u{1F4CD}", label: "Adresa", val: selectedChurch.address + ", " + selectedChurch.city },
               { icon: "\u{1F4DE}", label: "Telefon", val: selectedChurch.phone },
-              { icon: "\u26EA", label: "Diecéze", val: selectedChurch.diocese },
+              { icon: "\u26EA", label: "Dieceze", val: selectedChurch.diocese },
             ].map((item, i) => (
               <div key={i} style={st.infoCard}>
                 <div style={st.infoIcon}>{item.icon}</div>
@@ -311,13 +270,10 @@ const App = () => {
       <div style={{ ...st.homeWrap, opacity: animateIn ? 1 : 0, transform: animateIn ? "translateY(0)" : "translateY(12px)", transition: "all .45s ease" }}>
         <div style={st.homeHeader}>
           <div style={st.logo}>&#10013;</div>
-          <h1 style={st.homeTitle}>Farní Dar</h1>
-          <p style={st.homeSub}>Podpořte svou farnost platbou z mobilu.</p>
-          <p style={{fontSize: 12, color: c.soft, marginTop: 4, padding: "0 24px"}}>
-            Najděte svůj kostel a přispějte pár kliknutími místo hotovosti.
-          </p>
-          <p style={{fontSize: 11, color: c.soft, marginTop: 6, opacity: 0.7}}>
-            {locStatus === "found" ? "📍 Kostely ve vašem okolí" : locStatus === "default" ? "Zobrazuji kostely (poloha nepřístupná)" : "Zjišťuji polohu..."}
+          <h1 style={st.homeTitle}>Farni Dar</h1>
+          <p style={st.homeSub}>Podporte svou farnost platbou z mobilu.</p>
+          <p style={{ fontSize: 12, color: c.soft, marginTop: 4, padding: "0 24px" }}>
+            Najdete svuj kostel a prispejte par kliknutimi misto hotovosti.
           </p>
         </div>
         <div style={st.bottomNav}>
@@ -332,45 +288,62 @@ const App = () => {
             <span style={{ ...st.navLabel, ...(mainTab === "kostely" ? { color: "#96701F" } : {}) }}>Kostely</span>
           </button>
         </div>
+
         {mainTab === "liturgie" ? (
           <div style={st.liturgySection}>
-            <div style={st.liturgyHeader}>
-              <div style={st.liturgyColorDot} />
-              <div>
-                <div style={st.liturgyTitle}>{liturgy.title}</div>
-                <div style={st.liturgySubtitle}>{liturgy.subtitle}</div>
-                <div style={st.liturgyDate}>{liturgy.date} &middot; liturgická barva: {liturgy.colorName}</div>
+            {liturgyLoading ? (
+              <div style={{ textAlign: "center", padding: "48px 0", color: c.soft }}>
+                <div style={{ fontSize: 32, marginBottom: 12 }}>&#128214;</div>
+                <div>Nacitam cteni pro tuto nedeli...</div>
               </div>
-            </div>
-            {liturgy.sections.map((sec, i) => {
-              const isOpen = expandedReading === i;
-              return (
-                <div key={i} style={st.readingCard}>
-                  <button onClick={() => setExpandedReading(isOpen ? null : i)} style={st.readingHeader}>
-                    <div>
-                      <div style={st.readingType}>{sec.type}</div>
-                      <div style={st.readingRef}>{sec.ref}</div>
-                    </div>
-                    <div style={st.readingChevron}>{isOpen ? "\u25B2" : "\u25BC"}</div>
-                  </button>
-                  {isOpen && (
-                    <div style={st.readingBody}>
-                      <p style={st.readingIntro}>{sec.intro}</p>
-                      <div style={st.readingDivider} />
-                      <p style={st.readingText}>{sec.text}</p>
-                    </div>
-                  )}
+            ) : liturgyError || !liturgy ? (
+              <div style={{ textAlign: "center", padding: "48px 20px", color: c.soft }}>
+                <div style={{ fontSize: 32, marginBottom: 12 }}>&#128591;</div>
+                <div style={{ marginBottom: 16 }}>Cteni se nepodarilo nacist.</div>
+                <a href="https://www.vira.cz/Nedelni-liturgie" target="_blank" rel="noopener noreferrer" style={st.sourceLink}>
+                  Otevrit cteni na vira.cz &#8594;
+                </a>
+              </div>
+            ) : (
+              <>
+                <div style={st.liturgyHeader}>
+                  <div style={st.liturgyColorDot} />
+                  <div>
+                    <div style={st.liturgyTitle}>{liturgy.title}</div>
+                    {liturgy.date ? <div style={st.liturgyDate}>{liturgy.date}</div> : null}
+                  </div>
                 </div>
-              );
-            })}
-            <a href={liturgy.sourceUrl} target="_blank" rel="noopener noreferrer" style={st.sourceLink}>
-              Kompletní texty na vira.cz &#8594;
-            </a>
+                {liturgy.sections.map((sec, i) => {
+                  const isOpen = expandedReading === i;
+                  return (
+                    <div key={i} style={st.readingCard}>
+                      <button onClick={() => setExpandedReading(isOpen ? null : i)} style={st.readingHeader}>
+                        <div>
+                          <div style={st.readingType}>{sec.type}</div>
+                          <div style={st.readingRef}>{sec.ref}</div>
+                        </div>
+                        <div style={st.readingChevron}>{isOpen ? "&#9650;" : "&#9660;"}</div>
+                      </button>
+                      {isOpen && (
+                        <div style={st.readingBody}>
+                          {sec.intro ? <p style={st.readingIntro}>{sec.intro}</p> : null}
+                          <div style={st.readingDivider} />
+                          <p style={st.readingText}>{sec.text}</p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+                <a href="https://www.vira.cz/Nedelni-liturgie" target="_blank" rel="noopener noreferrer" style={st.sourceLink}>
+                  Cela liturgie na vira.cz &#8594;
+                </a>
+              </>
+            )}
           </div>
         ) : (
           <>
             <div style={st.searchWrap}>
-              <input type="text" placeholder="Hledat kostel nebo město..." value={search}
+              <input type="text" placeholder="Hledat kostel nebo mesto..." value={search}
                 onChange={e => setSearch(e.target.value)} style={st.searchInput} />
               {search && <button onClick={() => setSearch("")} style={st.clearBtn}>&#10005;</button>}
             </div>
@@ -386,8 +359,8 @@ const App = () => {
               <div style={st.listWrap}>
                 {filtered.length === 0 ? (
                   <div style={st.empty}>
-                    <p style={{ fontSize: 16 }}>Žádný kostel nenalezen</p>
-                    <p style={{ fontSize: 13, opacity: 0.6, marginTop: 4 }}>Zkuste jiný název nebo město</p>
+                    <p style={{ fontSize: 16 }}>Zadny kostel nenalezen</p>
+                    <p style={{ fontSize: 13, opacity: 0.6, marginTop: 4 }}>Zkuste jiny nazev nebo mesto</p>
                   </div>
                 ) : filtered.map((ch, i) => (
                   <button key={ch.id} onClick={() => { setSelectedChurch(ch); setActiveTab("dar"); }}
@@ -445,25 +418,25 @@ const st = {
   verseRef: { fontStyle: "normal", fontWeight: 600, fontSize: 12, opacity: 0.7 },
   app: { minHeight: "100vh", background: c.bg, fontFamily: "'DM Sans', sans-serif", maxWidth: 480, margin: "0 auto" },
   homeWrap: { padding: "0 0 32px" },
-  homeHeader: { textAlign: "center", padding: "40px 24px 16px", background: `linear-gradient(180deg, ${c.goldL} 0%, ${c.bg} 100%)` },
+  homeHeader: { textAlign: "center", padding: "40px 24px 16px", background: "linear-gradient(180deg, #F5EBD7 0%, #FAF6F1 100%)" },
   logo: { fontSize: 36, color: c.gold, marginBottom: 4 },
   homeTitle: { fontSize: 26, fontWeight: 700, color: c.text, fontFamily: "'Crimson Pro', serif" },
   homeSub: { fontSize: 13, color: c.soft, marginTop: 4 },
-  bottomNav: { display: "flex", margin: "8px 20px 16px", background: c.card, borderRadius: 14, border: `1.5px solid ${c.bdr}`, overflow: "hidden" },
+  bottomNav: { display: "flex", margin: "8px 20px 16px", background: c.card, borderRadius: 14, border: "1.5px solid #EDE6DB", overflow: "hidden" },
   navBtn: { flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 2, padding: "12px 0", background: "none", border: "none", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", transition: "all .2s" },
   navBtnActive: { background: c.goldL },
   navIcon: { fontSize: 22 },
   navLabel: { fontSize: 12, fontWeight: 600, color: c.soft },
   searchWrap: { margin: "0 20px 12px", position: "relative" },
-  searchInput: { width: "100%", padding: "13px 16px", fontSize: 15, border: `1.5px solid ${c.bdr}`, borderRadius: 14, outline: "none", background: c.card, color: c.text, fontFamily: "'DM Sans', sans-serif" },
+  searchInput: { width: "100%", padding: "13px 16px", fontSize: 15, border: "1.5px solid #EDE6DB", borderRadius: 14, outline: "none", background: c.card, color: c.text, fontFamily: "'DM Sans', sans-serif" },
   clearBtn: { position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", fontSize: 16, color: c.soft, cursor: "pointer" },
   toggleRow: { display: "flex", gap: 8, margin: "0 20px 16px" },
-  toggleBtn: { flex: 1, padding: "10px 0", fontSize: 14, fontWeight: 500, background: c.card, border: `1.5px solid ${c.bdr}`, borderRadius: 10, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", color: c.soft, transition: "all .2s" },
+  toggleBtn: { flex: 1, padding: "10px 0", fontSize: 14, fontWeight: 500, background: c.card, border: "1.5px solid #EDE6DB", borderRadius: 10, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", color: c.soft, transition: "all .2s" },
   toggleOn: { background: c.goldL, borderColor: c.gold, color: c.goldD, fontWeight: 600 },
-  mapBox: { margin: "0 20px", borderRadius: 16, overflow: "hidden", border: `1.5px solid ${c.bdr}` },
+  mapBox: { margin: "0 20px", borderRadius: 16, overflow: "hidden", border: "1.5px solid #EDE6DB" },
   mapInner: { width: "100%", height: 420 },
   listWrap: { padding: "0 20px" },
-  card: { display: "flex", alignItems: "center", width: "100%", padding: "14px", marginBottom: 8, background: c.card, border: `1px solid ${c.bdr}`, borderRadius: 14, cursor: "pointer", textAlign: "left", fontFamily: "'DM Sans', sans-serif", animation: "fadeSlideUp .4s ease both" },
+  card: { display: "flex", alignItems: "center", width: "100%", padding: "14px", marginBottom: 8, background: c.card, border: "1px solid #EDE6DB", borderRadius: 14, cursor: "pointer", textAlign: "left", fontFamily: "'DM Sans', sans-serif", animation: "fadeSlideUp .4s ease both" },
   cardEmoji: { fontSize: 28, marginRight: 12, flexShrink: 0 },
   cardInfo: { flex: 1, minWidth: 0 },
   cardName: { fontSize: 14, fontWeight: 600, color: c.text, marginBottom: 2 },
@@ -476,34 +449,37 @@ const st = {
   detailWrap: { padding: "0 0 40px" },
   detailHeader: { padding: "16px 20px 0" },
   backBtn: { background: "none", border: "none", fontSize: 15, color: c.gold, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, padding: "8px 0" },
-  detailHero: { textAlign: "center", padding: "16px 24px 24px", background: `linear-gradient(180deg, ${c.goldL} 0%, ${c.bg} 100%)` },
+  detailHero: { textAlign: "center", padding: "16px 24px 24px", background: "linear-gradient(180deg, #F5EBD7 0%, #FAF6F1 100%)" },
   detailName: { fontSize: 21, fontWeight: 700, color: c.text, fontFamily: "'Crimson Pro', serif" },
   detailCity: { fontSize: 15, color: c.soft, marginTop: 4 },
   detailAddr: { fontSize: 13, color: c.soft, marginTop: 2 },
   detailDiocese: { fontSize: 12, color: c.gold, marginTop: 6, fontWeight: 500 },
-  tabRow: { display: "flex", margin: "0 20px", borderBottom: `2px solid ${c.bdr}` },
+  tabRow: { display: "flex", margin: "0 20px", borderBottom: "2px solid #EDE6DB" },
   tab: { flex: 1, padding: "12px 0", background: "none", border: "none", fontSize: 14, fontWeight: 500, color: c.soft, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", borderBottom: "2px solid transparent", marginBottom: -2 },
   tabActive: { color: c.gold, borderBottomColor: c.gold, fontWeight: 600 },
   donateSection: { padding: "24px 20px" },
   donateLabel: { fontSize: 15, fontWeight: 600, color: c.text, marginBottom: 14 },
   amountGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 20 },
-  amountBtn: { padding: "16px 0", fontSize: 17, fontWeight: 600, textAlign: "center", background: c.card, border: `1.5px solid ${c.bdr}`, borderRadius: 12, cursor: "pointer", color: c.text, fontFamily: "'DM Sans', sans-serif", transition: "all .2s" },
+  amountBtn: { padding: "16px 0", fontSize: 17, fontWeight: 600, textAlign: "center", background: c.card, border: "1.5px solid #EDE6DB", borderRadius: 12, cursor: "pointer", color: c.text, fontFamily: "'DM Sans', sans-serif", transition: "all .2s" },
   amountBtnActive: { background: c.goldL, borderColor: c.gold, color: c.goldD },
   customRow: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 },
   customLabel: { fontSize: 14, color: c.soft },
   customInputWrap: { display: "flex", alignItems: "center", gap: 6 },
-  customInput: { width: 90, padding: "10px 12px", fontSize: 16, fontWeight: 600, border: `1.5px solid ${c.bdr}`, borderRadius: 10, outline: "none", textAlign: "right", fontFamily: "'DM Sans', sans-serif", color: c.text, background: c.card },
+  customInput: { width: 90, padding: "10px 12px", fontSize: 16, fontWeight: 600, border: "1.5px solid #EDE6DB", borderRadius: 10, outline: "none", textAlign: "right", fontFamily: "'DM Sans', sans-serif", color: c.text, background: c.card },
   customCurr: { fontSize: 14, color: c.soft, fontWeight: 500 },
-  donateBtn: { width: "100%", padding: "16px 0", fontSize: 16, fontWeight: 600, background: `linear-gradient(135deg, ${c.gold}, ${c.accent})`, color: "#fff", border: "none", borderRadius: 14, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", letterSpacing: 0.3 },
+  donateBtn: { width: "100%", padding: "16px 0", fontSize: 16, fontWeight: 600, background: "linear-gradient(135deg, #C8943E, #8B5E3C)", color: "#fff", border: "none", borderRadius: 14, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", letterSpacing: 0.3 },
   donateBtnOff: { opacity: 0.45, cursor: "default" },
   donateNote: { textAlign: "center", fontSize: 12, color: c.soft, marginTop: 14 },
+  paymentRefBox: { background: c.goldL, borderRadius: 10, padding: "10px 14px", marginTop: 12, marginBottom: 4, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 6 },
+  paymentRefLabel: { fontSize: 11, color: c.soft, textTransform: "uppercase", letterSpacing: 0.5 },
+  paymentRefValue: { fontSize: 13, fontWeight: 700, color: c.goldD, fontFamily: "monospace" },
+  paymentRefSub: { fontSize: 12, color: c.soft, fontStyle: "italic" },
   liturgySection: { padding: "0 20px 32px" },
-  liturgyHeader: { display: "flex", alignItems: "flex-start", gap: 14, padding: "16px", background: c.card, border: `1px solid ${c.bdr}`, borderRadius: 14, marginBottom: 16 },
-  liturgyColorDot: { width: 20, height: 20, borderRadius: 10, background: "#fff", border: `2px solid ${c.gold}`, flexShrink: 0, marginTop: 4, boxShadow: "0 0 8px rgba(200,148,62,.3)" },
+  liturgyHeader: { display: "flex", alignItems: "flex-start", gap: 14, padding: "16px", background: c.card, border: "1px solid #EDE6DB", borderRadius: 14, marginBottom: 16 },
+  liturgyColorDot: { width: 20, height: 20, borderRadius: 10, background: "#fff", border: "2px solid #C8943E", flexShrink: 0, marginTop: 4, boxShadow: "0 0 8px rgba(200,148,62,.3)" },
   liturgyTitle: { fontSize: 17, fontWeight: 700, color: c.text, fontFamily: "'Crimson Pro', serif", lineHeight: 1.3 },
-  liturgySubtitle: { fontSize: 13, color: c.gold, fontWeight: 600, marginTop: 2 },
   liturgyDate: { fontSize: 12, color: c.soft, marginTop: 4 },
-  readingCard: { marginBottom: 10, borderRadius: 12, border: `1px solid ${c.bdr}`, background: c.card, overflow: "hidden" },
+  readingCard: { marginBottom: 10, borderRadius: 12, border: "1px solid #EDE6DB", background: c.card, overflow: "hidden" },
   readingHeader: { display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", padding: "14px 16px", background: "none", border: "none", cursor: "pointer", fontFamily: "'DM Sans', sans-serif", textAlign: "left" },
   readingType: { fontSize: 13, fontWeight: 600, color: c.gold, textTransform: "uppercase", letterSpacing: 0.5 },
   readingRef: { fontSize: 14, fontWeight: 500, color: c.text, marginTop: 2 },
@@ -514,14 +490,11 @@ const st = {
   readingText: { fontSize: 14, color: c.text, lineHeight: 1.7, whiteSpace: "pre-line", fontFamily: "'Crimson Pro', serif" },
   sourceLink: { display: "block", textAlign: "center", fontSize: 13, color: c.gold, fontWeight: 600, textDecoration: "none", marginTop: 16, padding: "12px", background: c.goldL, borderRadius: 10 },
   infoSection: { padding: "20px 20px" },
-  infoCard: { display: "flex", alignItems: "flex-start", gap: 14, padding: "14px", marginBottom: 8, background: c.card, border: `1px solid ${c.bdr}`, borderRadius: 12 },
+  infoCard: { display: "flex", alignItems: "flex-start", gap: 14, padding: "14px", marginBottom: 8, background: c.card, border: "1px solid #EDE6DB", borderRadius: 12 },
   infoIcon: { fontSize: 22, flexShrink: 0, marginTop: 2 },
   infoLabel: { fontSize: 11, color: c.soft, marginBottom: 2, textTransform: "uppercase", letterSpacing: 0.5 },
   infoVal: { fontSize: 14, color: c.text, fontWeight: 500 },
-   paymentRefBox: { background: c.goldL, borderRadius: 10, padding: "10px 14px", marginBottom: 12, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 6 },
-  paymentRefLabel: { fontSize: 11, color: c.soft, textTransform: "uppercase", letterSpacing: 0.5 },
-  paymentRefValue: { fontSize: 13, fontWeight: 700, color: c.goldD, fontFamily: "monospace" },
-  paymentRefSub: { fontSize: 12, color: c.soft, fontStyle: "italic" },
 };
 
 export default App;
+
