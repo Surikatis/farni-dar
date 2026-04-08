@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Hlavní stránka -->
+  <url>
+    <loc>https://farnidar.cz/</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Katedrála sv. Víta, Václava a Vojtěcha – Praha -->
+  <url><loc>https://farnidar.cz/kostel/katedrala-sv-vita-praha</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Kostel Panny Marie před Týnem – Praha -->
+  <url><loc>https://farnidar.cz/kostel/panna-marie-tyn-praha</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Kostel sv. Mikuláše – Praha -->
+  <url><loc>https://farnidar.cz/kostel/sv-mikulas-mala-strana-praha</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Kostel Nejsvětějšího Srdce Páně – Praha -->
+  <url><loc>https://farnidar.cz/kostel/nejsvetejsi-srdce-pane-praha</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Kostel sv. Ignáce – Praha -->
+  <url><loc>https://farnidar.cz/kostel/sv-ignac-praha</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+
+  <!-- Kladno -->
+  <url><loc>https://farnidar.cz/kostel/nanebevzetí-pm-kladno</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://farnidar.cz/kostel/sv-cyril-metodej-kladno</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Beroun -->
+  <url><loc>https://farnidar.cz/kostel/zvestovani-pm-beroun</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://farnidar.cz/kostel/sv-jakub-beroun</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Hradec Králové -->
+  <url><loc>https://farnidar.cz/kostel/katedrala-sv-ducha-hradec-kralove</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://farnidar.cz/kostel/nanebevzetí-pm-piaristicka-hradec-kralove</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://farnidar.cz/kostel/panna-marie-dominikani-hradec-kralove</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://farnidar.cz/kostel/sv-jan-nepomucky-hradec-kralove</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://farnidar.cz/kostel/sv-petr-pavel-hradec-kralove</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Pardubice -->
+  <url><loc>https://farnidar.cz/kostel/katedrala-zvestovani-pm-pardubice</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://farnidar.cz/kostel/sv-jan-krtitel-pardubice</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Olomouc -->
+  <url><loc>https://farnidar.cz/kostel/katedrala-sv-vaclava-olomouc</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://farnidar.cz/kostel/sv-morice-olomouc</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://farnidar.cz/kostel/panna-marie-snezna-olomouc</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://farnidar.cz/kostel/sv-michal-dominikani-olomouc</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://farnidar.cz/kostel/sv-roch-olomouc</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Brno -->
+  <url><loc>https://farnidar.cz/kostel/katedrala-sv-petra-pavla-brno</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://farnidar.cz/kostel/bazilika-nanebevzetí-pm-brno</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://farnidar.cz/kostel/sv-jakub-brno</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://farnidar.cz/kostel/sv-tomas-brno</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://farnidar.cz/kostel/sv-jan-nepomucky-brno</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- České Budějovice -->
+  <url><loc>https://farnidar.cz/kostel/katedrala-sv-mikulase-ceske-budejovice</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://farnidar.cz/kostel/panna-marie-bolestna-piariste-ceske-budejovice</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Příbram – Svatá Hora (důležitá poutnická lokalita) -->
+  <url><loc>https://farnidar.cz/kostel/bazilika-svata-hora-pribram</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+
+  <!-- Žďár nad Sázavou – Zelená hora UNESCO -->
+  <url><loc>https://farnidar.cz/kostel/sv-jan-nepomucky-zelena-hora-zdar</loc><lastmod>2026-04-08</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+
+</urlset>
