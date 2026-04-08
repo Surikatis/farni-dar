@@ -380,8 +380,10 @@ const App = () => {
             )}
           </>
         )}
-      </div>
-    </div>
+        <div style={{ textAlign: "center", padding: "16px 20px 8px", borderTop: `1px solid ${c.bdr}`, marginTop: 8 }}>
+          <a href="/podminky" style={{ fontSize: 12, color: c.soft, textDecoration: "none", marginRight: 16 }}>Obchodní podmínky</a>
+          <a href="/kontakt" style={{ fontSize: 12, color: c.soft, textDecoration: "none" }}>Kontakt</a>
+        </div>
   );
 };
 
