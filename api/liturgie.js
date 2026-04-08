@@ -6,61 +6,36 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Methods", "GET");
 
   try {
-    // Krok 1: Načti rozcestník a najdi odkaz na nejbližší neděli
+    // Krok 1: Najdi odkaz na nejbližší neděli
     const indexRes = await fetch("https://www.vira.cz/Nedelni-liturgie", {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; FarniDar/1.0)",
-        "Accept-Language": "cs-CZ,cs;q=0.9",
-      },
+      headers: { "User-Agent": "Mozilla/5.0 (compatible; FarniDar/1.0)", "Accept-Language": "cs-CZ,cs;q=0.9" },
     });
     const indexHtml = await indexRes.text();
 
-    // Najdi odkaz na "Následující neděli" nebo první nadcházející neděli
-    // Struktura: <a href="/2-nedele-velikonocni-cyklus-a-1.html">Následující neděle</a>
-    // nebo: #### 12. 4. 2026  [2. neděle velikonoční...](URL)
+    // Hledáme odkaz "Následující neděle" nebo první odkaz na neděli
     let sundayUrl = null;
-
-    // Hledáme odkaz "Následující neděle"
-    const nextMatch = indexHtml.match(/href="([^"]+)"[^>]*>Následující neděle</);
-    if (nextMatch) {
-      sundayUrl = "https://www.vira.cz" + nextMatch[1];
-    }
-
-    // Záloha: hledáme první odkaz na stránku s čteními v sekci rychlé volby
-    if (!sundayUrl) {
-      const quickMatch = indexHtml.match(/href="(\/[a-z0-9\-]+\.html)"[^>]*>Neděle</);
-      if (quickMatch) {
-        sundayUrl = "https://www.vira.cz" + quickMatch[1];
-      }
-    }
-
-    // Záloha 2: vezmi první .html odkaz v oblasti výpisu nedělí
-    if (!sundayUrl) {
-      const listMatch = indexHtml.match(/href="(\/[a-z0-9\-]+-cyklus-[abc]-\d+\.html)"/i);
-      if (listMatch) {
-        sundayUrl = "https://www.vira.cz" + listMatch[1];
-      }
-    }
+    const nextMatch = indexHtml.match(/href="([^"]+)"[^>]*>\s*N[aá]sleduj[ií]c[ií] ned[eě]le/i);
+    if (nextMatch) sundayUrl = "https://www.vira.cz" + nextMatch[1];
 
     if (!sundayUrl) {
-      return res.status(200).json({ error: "no_sunday_url", sections: [] });
+      const quickMatch = indexHtml.match(/href="(\/[a-z0-9\-]+-cyklus-[abc]-\d+\.html)"/i);
+      if (quickMatch) sundayUrl = "https://www.vira.cz" + quickMatch[1];
     }
+
+    if (!sundayUrl) return res.status(200).json({ error: "no_sunday_url", sections: [] });
 
     // Krok 2: Načti stránku s čteními
     const pageRes = await fetch(sundayUrl, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; FarniDar/1.0)",
-        "Accept-Language": "cs-CZ,cs;q=0.9",
-      },
+      headers: { "User-Agent": "Mozilla/5.0 (compatible; FarniDar/1.0)", "Accept-Language": "cs-CZ,cs;q=0.9" },
     });
     const html = await pageRes.text();
 
-    // Pomocná funkce: vyčisti HTML tagy a entity
+    // Vyčisti HTML tagy a entity
     function stripHtml(s) {
       return s
         .replace(/<br\s*\/?>/gi, "\n")
-        .replace(/<p[^>]*>/gi, "\n")
         .replace(/<\/p>/gi, "\n")
+        .replace(/<p[^>]*>/gi, "")
         .replace(/<[^>]+>/g, "")
         .replace(/&nbsp;/g, " ")
         .replace(/&amp;/g, "&")
@@ -72,109 +47,93 @@ export default async function handler(req, res) {
         .trim();
     }
 
-    // Pomocná funkce: extrahuj blok mezi dvěma h4 nadpisy
-    function extractBlock(html, startPattern, endPatterns) {
-      const startMatch = html.search(startPattern);
-      if (startMatch === -1) return "";
+    // Zpracuj jednu sekci čtení
+    function parseSection(content, type, forcedRef) {
+      // Intro = první odstavec (kontext čtení)
+      const pMatch = content.match(/<p[^>]*>([\s\S]*?)<\/p>/i);
+      const intro = pMatch ? stripHtml(pMatch[1]).trim() : "";
 
-      let endIdx = html.length;
-      for (const ep of endPatterns) {
-        const m = html.slice(startMatch + 10).search(ep);
-        if (m !== -1 && startMatch + 10 + m < endIdx) {
-          endIdx = startMatch + 10 + m;
+      // Reference = vzor jako "Sk 2,42-47" nebo "1 Petr 1,3-9" nebo "Jan 20,19-31"
+      let ref = forcedRef || "";
+      let refIdx = -1;
+
+      if (!ref) {
+        // Hledáme reference v HTML - zkusíme <strong> první, pak plain text
+        const strongMatch = content.match(/<strong>([^<]{4,25})<\/strong>/);
+        const plainMatch = content.match(/\b([1-3]?\s*[A-ZÁČŽŠŘĚÍÓÝÚ][a-záčžšřěíýúůóéď]{1,5}\s+\d+,[\d\.,\-a-z]+)/u);
+
+        if (strongMatch && /\d/.test(strongMatch[1])) {
+          ref = strongMatch[1].trim();
+          refIdx = content.indexOf(strongMatch[0]);
+        } else if (plainMatch) {
+          ref = plainMatch[1].trim();
+          refIdx = content.indexOf(plainMatch[0]);
         }
       }
-      return html.slice(startMatch, endIdx);
+
+      // Text začíná ZA referencí
+      let textContent = content;
+      if (refIdx !== -1) {
+        // Najdi konec reference v HTML a vezmi obsah za ní
+        const refEndInHtml = refIdx + (content.indexOf(ref, refIdx) !== -1
+          ? content.indexOf(ref, refIdx) - refIdx + ref.length
+          : ref.length + 20);
+        textContent = content.slice(refEndInHtml);
+      } else if (pMatch) {
+        // Bez reference – text začíná za prvním odstavcem (intro)
+        textContent = content.slice(content.indexOf(pMatch[0]) + pMatch[0].length);
+      }
+
+      const text = stripHtml(textContent).trim();
+      if (text.length < 30) return null;
+      return { type, ref, intro, text };
     }
 
+    // Rozdělení HTML po <h4> tagech — nejspolehlivější přístup
     const sections = [];
-    const h4End = [/<h4/i, /<h3/i, /<h2/i];
+    const h4Parts = html.split(/<h4[^>]*>/i);
 
-    // Název neděle
-    const titleMatch = html.match(/<h1[^>]*>(.*?)<\/h1>/s);
-    const title = titleMatch ? stripHtml(titleMatch[1]) : "Nedělní liturgie";
-
-    // Datum
+    const title_match = html.match(/<h1[^>]*>(.*?)<\/h1>/s);
+    const title = title_match ? stripHtml(title_match[1]) : "Nedělní liturgie";
     const dateMatch = html.match(/(\d{1,2}\.\s*\d{1,2}\.\s*\d{4})/);
     const date = dateMatch ? dateMatch[1].trim() : "";
 
-    // 1. ČTENÍ
-    const block1 = extractBlock(html, /<h4[^>]*>.*?1\.\s*ČTENÍ.*?<\/h4>/si, h4End);
-    if (block1) {
-      // Ref = první <strong> nebo text na samostatném řádku jako "Sk 2,42-47"
-      const refMatch = block1.match(/<strong>([^<]{3,30})<\/strong>/) ||
-                       block1.match(/([A-Z][a-z]{1,3}\s+\d+[,\.\d\-]+)/);
-      const ref = refMatch ? refMatch[1].trim() : "";
+    for (let i = 1; i < h4Parts.length; i++) {
+      const closingIdx = h4Parts[i].indexOf("</h4>");
+      if (closingIdx === -1) continue;
 
-      // Intro = první <p> text
-      const introMatch = block1.match(/<h4[^>]*>.*?<\/h4>\s*<p[^>]*>(.*?)<\/p>/si);
-      const intro = introMatch ? stripHtml(introMatch[1]) : "";
+      const headingRaw = h4Parts[i].slice(0, closingIdx);
+      const heading = stripHtml(headingRaw).trim();
+      const content = h4Parts[i].slice(closingIdx + 5);
 
-      // Text = vše po referenci
-      const textStart = refMatch ? block1.indexOf(refMatch[0]) + refMatch[0].length : block1.indexOf("</h4>") + 5;
-      const text = stripHtml(block1.slice(textStart));
+      if (/^1\.\s*ČTENÍ/i.test(heading)) {
+        const s = parseSection(content, "1. čtení");
+        if (s) sections.push(s);
 
-      if (text.length > 50) {
-        sections.push({ type: "1. čtení", ref, intro, text });
-      }
-    }
+      } else if (/^ŽALM/i.test(heading)) {
+        // Reference je součástí nadpisu: "ŽALM Žl 118,2-4.13-15.22-24"
+        const refInHeading = heading.match(/Žl\s+[\d,\.\-\+a-z]+/i);
+        const s = parseSection(content, "Žalm", refInHeading ? refInHeading[0] : "");
+        if (s) sections.push(s);
 
-    // ŽALM
-    const blockZ = extractBlock(html, /<h4[^>]*>.*?ŽALM.*?<\/h4>/si, h4End);
-    if (blockZ) {
-      const refMatch = blockZ.match(/Žl\s+[\d,\.\-]+[a-z]*/i);
-      const ref = refMatch ? refMatch[0].trim() : "";
-      const introMatch = blockZ.match(/<h4[^>]*>.*?<\/h4>\s*<p[^>]*>(.*?)<\/p>/si);
-      const intro = introMatch ? stripHtml(introMatch[1]) : "";
-      const textStart = blockZ.indexOf("</h4>") + 5;
-      const text = stripHtml(blockZ.slice(textStart));
-      if (text.length > 20) {
-        sections.push({ type: "Žalm", ref, intro, text });
-      }
-    }
+      } else if (/^2\.\s*ČTENÍ/i.test(heading)) {
+        const s = parseSection(content, "2. čtení");
+        if (s) sections.push(s);
 
-    // 2. ČTENÍ
-    const block2 = extractBlock(html, /<h4[^>]*>.*?2\.\s*ČTENÍ.*?<\/h4>/si, h4End);
-    if (block2) {
-      const refMatch = block2.match(/<strong>([^<]{3,30})<\/strong>/) ||
-                       block2.match(/([A-Z][a-z]{1,3}\s+\d+[,\.\d\-]+)/);
-      const ref = refMatch ? refMatch[1].trim() : "";
-      const introMatch = block2.match(/<h4[^>]*>.*?<\/h4>\s*<p[^>]*>(.*?)<\/p>/si);
-      const intro = introMatch ? stripHtml(introMatch[1]) : "";
-      const textStart = refMatch ? block2.indexOf(refMatch[0]) + refMatch[0].length : block2.indexOf("</h4>") + 5;
-      const text = stripHtml(block2.slice(textStart));
-      if (text.length > 50) {
-        sections.push({ type: "2. čtení", ref, intro, text });
-      }
-    }
-
-    // EVANGELIUM
-    const blockE = extractBlock(html, /<h4[^>]*>.*?EVANGELIUM.*?<\/h4>/si, h4End);
-    if (blockE) {
-      const refMatch = blockE.match(/<strong>([^<]{3,30})<\/strong>/) ||
-                       blockE.match(/([A-Z][a-z]{1,3}\s+\d+[,\.\d\-]+)/);
-      const ref = refMatch ? refMatch[1].trim() : "";
-      const introMatch = blockE.match(/<h4[^>]*>.*?<\/h4>\s*<p[^>]*>(.*?)<\/p>/si);
-      const intro = introMatch ? stripHtml(introMatch[1]) : "";
-      const textStart = refMatch ? blockE.indexOf(refMatch[0]) + refMatch[0].length : blockE.indexOf("</h4>") + 5;
-      const text = stripHtml(blockE.slice(textStart));
-      if (text.length > 50) {
-        sections.push({ type: "Evangelium", ref, intro, text });
+      } else if (/^EVANGELIUM$/i.test(heading)) {
+        const s = parseSection(content, "Evangelium");
+        if (s) sections.push(s);
       }
     }
 
     if (sections.length === 0) {
-      return res.status(200).json({
-        error: "parse_failed",
-        debug: { sundayUrl, title },
-        sections: [],
-      });
+      return res.status(200).json({ error: "parse_failed", debug: { sundayUrl, title }, sections: [] });
     }
 
     return res.status(200).json({ title, date, sundayUrl, sections });
 
   } catch (err) {
-    console.error("liturgie API error:", err);
+    console.error("liturgie error:", err);
     return res.status(500).json({ error: err.message, sections: [] });
   }
 }
