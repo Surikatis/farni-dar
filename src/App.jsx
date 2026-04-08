@@ -381,8 +381,8 @@ const App = () => {
           </>
         )}
         <div style={{ textAlign: "center", padding: "16px 20px 8px", borderTop: "1px solid #EDE6DB", marginTop: 8 }}>
-          <a href="/podminky" style={{ fontSize: 12, color: "#7A6E5E", textDecoration: "none", marginRight: 16 }}>Obchodn&#237; podm&#237;nky</a>
-          <a href="/kontakt" style={{ fontSize: 12, color: "#7A6E5E", textDecoration: "none" }}>Kontakt</a>
+<a href="/podminky.html" style={{ fontSize: 12, color: "#7A6E5E", textDecoration: "none", marginRight: 16 }}>Obchodn&#237; podm&#237;nky</a>
+<a href="/kontakt.html" style={{ fontSize: 12, color: "#7A6E5E", textDecoration: "none" }}>Kontakt</a>
         </div>
       </div>
     </div>
