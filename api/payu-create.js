@@ -34,7 +34,7 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") return res.status(200).end();
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
-  const { amount, churchName, churchId, buyerEmail } = req.body;
+  const { amount, churchName, churchId, churchCity, buyerEmail } = req.body;
 
   // Validace vstupu
   if (!amount || amount < 10 || amount > 100000) {
