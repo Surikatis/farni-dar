@@ -27,7 +27,6 @@ const App = () => {
   const [selectedChurch, setSelectedChurch] = useState(null);
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [customAmount, setCustomAmount] = useState("");
-  const [showSuccess, setShowSuccess] = useState(false);
   const [activeTab, setActiveTab] = useState("dar");
   const [animateIn, setAnimateIn] = useState(false);
   const [userLoc, setUserLoc] = useState(null);
@@ -37,6 +36,9 @@ const App = () => {
   const [liturgy, setLiturgy] = useState(null);
   const [liturgyLoading, setLiturgyLoading] = useState(true);
   const [liturgyError, setLiturgyError] = useState(false);
+  // Platební stavy
+  const [paymentLoading, setPaymentLoading] = useState(false);
+  const [paymentError, setPaymentError] = useState(null);
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markersRef = useRef([]);
@@ -146,12 +148,39 @@ const App = () => {
 
   const finalAmount = selectedAmount || (customAmount ? parseInt(customAmount) : 0);
 
-  const handleDonate = () => {
-    if (finalAmount > 0) {
-      setShowSuccess(true);
-      setTimeout(() => { setShowSuccess(false); setSelectedAmount(null); setCustomAmount(""); setActiveTab("dar"); }, 3000);
+  // ─── SKUTEČNÁ PLATBA PŘES PAYU ───────────────────────────────────────────
+  const handleDonate = async () => {
+    if (finalAmount <= 0 || !selectedChurch) return;
+
+    setPaymentLoading(true);
+    setPaymentError(null);
+
+    try {
+      const res = await fetch("/api/payu-create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: finalAmount,
+          churchName: selectedChurch.name,
+          churchId: selectedChurch.id,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.redirectUrl) {
+        throw new Error(data.error || "Nepodařilo se vytvořit platbu");
+      }
+
+      // Přesměrování na PayU platební bránu
+      window.location.href = data.redirectUrl;
+
+    } catch (err) {
+      setPaymentError(err.message || "Platba se nezdařila. Zkuste to znovu.");
+      setPaymentLoading(false);
     }
   };
+  // ─────────────────────────────────────────────────────────────────────────
 
   const goHome = () => {
     setSelectedChurch(null);
@@ -159,6 +188,7 @@ const App = () => {
     setCustomAmount("");
     setActiveTab("dar");
     setExpandedReading(null);
+    setPaymentError(null);
   };
 
   if (screen === "splash") return (
@@ -168,18 +198,6 @@ const App = () => {
         <div style={st.splashTitle}>Farni Dar</div>
         <div style={st.splashSub}>Podporte svou farnost jednoduse</div>
         <div style={st.splashLoader}><div style={st.splashLoaderBar} /></div>
-      </div>
-    </div>
-  );
-
-  if (showSuccess) return (
-    <div style={st.successWrap}><style>{css}</style>
-      <div style={{ fontSize: 64, marginBottom: 16, animation: "gentleFloat 3s ease-in-out infinite" }}>&#128330;&#65039;</div>
-      <div style={st.successTitle}>Dekujeme!</div>
-      <div style={st.successText}>Vas dar {finalAmount} Kc pro {selectedChurch?.name} byl prijat.</div>
-      <div style={st.successVerse}>
-        &bdquo;Kazdy at dava podle toho, jak se ve svem srdci predem rozhodl.&ldquo;
-        <br /><span style={st.verseRef}>2. Korintskym 9:7</span>
       </div>
     </div>
   );
@@ -213,7 +231,7 @@ const App = () => {
             <p style={st.donateLabel}>Vyberte castku:</p>
             <div style={st.amountGrid}>
               {amounts.map(a => (
-                <button key={a} onClick={() => { setSelectedAmount(a); setCustomAmount(""); }}
+                <button key={a} onClick={() => { setSelectedAmount(a); setCustomAmount(""); setPaymentError(null); }}
                   style={{ ...st.amountBtn, ...(selectedAmount === a ? st.amountBtnActive : {}) }}>
                   {a} Kc
                 </button>
@@ -223,21 +241,37 @@ const App = () => {
               <span style={st.customLabel}>Jina castka:</span>
               <div style={st.customInputWrap}>
                 <input type="number" placeholder="0" value={customAmount}
-                  onChange={e => { setCustomAmount(e.target.value); setSelectedAmount(null); }}
+                  onChange={e => { setCustomAmount(e.target.value); setSelectedAmount(null); setPaymentError(null); }}
                   style={st.customInput} />
                 <span style={st.customCurr}>Kc</span>
               </div>
             </div>
-            <button onClick={handleDonate} disabled={finalAmount <= 0}
-              style={{ ...st.donateBtn, ...(finalAmount <= 0 ? st.donateBtnOff : {}) }}>
-              {finalAmount > 0 ? `Darovat ${finalAmount} Kc` : "Vyberte castku"}
+
+            {/* Chybová hláška */}
+            {paymentError && (
+              <div style={st.errorBox}>
+                ⚠️ {paymentError}
+              </div>
+            )}
+
+            <button
+              onClick={handleDonate}
+              disabled={finalAmount <= 0 || paymentLoading}
+              style={{ ...st.donateBtn, ...(finalAmount <= 0 || paymentLoading ? st.donateBtnOff : {}) }}
+            >
+              {paymentLoading
+                ? "Přesměrovávám na platební bránu…"
+                : finalAmount > 0
+                  ? `Darovat ${finalAmount} Kč`
+                  : "Vyberte částku"}
             </button>
+
             <div style={st.paymentRefBox}>
               <span style={st.paymentRefLabel}>Reference platby:</span>
               <span style={st.paymentRefValue}>{getPaymentRef(selectedChurch)}</span>
               <span style={st.paymentRefSub}>— {selectedChurch.name}</span>
             </div>
-            <p style={st.donateNote}>Zabezpecena platba · Prototyp – platba neni realna</p>
+            <p style={st.donateNote}>Zabezpečená platba kartou · PayU</p>
           </div>
         ) : (
           <div style={st.infoSection}>
@@ -381,8 +415,8 @@ const App = () => {
           </>
         )}
         <div style={{ textAlign: "center", padding: "16px 20px 8px", borderTop: "1px solid #EDE6DB", marginTop: 8 }}>
-<a href="/podminky.html" style={{ fontSize: 12, color: "#7A6E5E", textDecoration: "none", marginRight: 16 }}>Obchodn&#237; podm&#237;nky</a>
-<a href="/kontakt.html" style={{ fontSize: 12, color: "#7A6E5E", textDecoration: "none" }}>Kontakt</a>
+          <a href="/podminky.html" style={{ fontSize: 12, color: "#7A6E5E", textDecoration: "none", marginRight: 16 }}>Obchodní podmínky</a>
+          <a href="/kontakt.html" style={{ fontSize: 12, color: "#7A6E5E", textDecoration: "none" }}>Kontakt</a>
         </div>
       </div>
     </div>
@@ -404,7 +438,7 @@ input[type=number] { -moz-appearance: textfield; }
 const c = {
   bg: "#FAF6F1", card: "#FFFFFF", gold: "#C8943E", goldL: "#F5EBD7", goldD: "#96701F",
   text: "#2D2418", soft: "#7A6E5E", accent: "#8B5E3C", bdr: "#EDE6DB",
-  ok: "#4A7C59", okBg: "#E8F2EB"
+  ok: "#4A7C59", okBg: "#E8F2EB", err: "#991B1B", errBg: "#FEF2F2"
 };
 
 const st = {
@@ -415,11 +449,6 @@ const st = {
   splashSub: { fontSize: 17, marginTop: 12, fontFamily: "'DM Sans', sans-serif", color: "#E8D5B8", letterSpacing: 0.3 },
   splashLoader: { width: 140, height: 3, background: "rgba(255,255,255,.15)", borderRadius: 2, margin: "28px auto 0", overflow: "hidden" },
   splashLoaderBar: { height: "100%", background: "#C8943E", borderRadius: 2, animation: "loaderGrow 2s ease-in-out forwards" },
-  successWrap: { height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: c.okBg, fontFamily: "'DM Sans', sans-serif", padding: 32, textAlign: "center" },
-  successTitle: { fontSize: 28, fontWeight: 700, color: c.ok, fontFamily: "'Crimson Pro', serif" },
-  successText: { fontSize: 16, color: c.text, marginTop: 8, maxWidth: 280 },
-  successVerse: { marginTop: 32, fontSize: 14, fontStyle: "italic", color: c.soft, maxWidth: 260, lineHeight: 1.6 },
-  verseRef: { fontStyle: "normal", fontWeight: 600, fontSize: 12, opacity: 0.7 },
   app: { minHeight: "100vh", background: c.bg, fontFamily: "'DM Sans', sans-serif", maxWidth: 480, margin: "0 auto" },
   homeWrap: { padding: "0 0 32px" },
   homeHeader: { textAlign: "center", padding: "40px 24px 16px", background: "linear-gradient(180deg, #F5EBD7 0%, #FAF6F1 100%)" },
@@ -466,11 +495,12 @@ const st = {
   amountGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 20 },
   amountBtn: { padding: "16px 0", fontSize: 17, fontWeight: 600, textAlign: "center", background: c.card, border: "1.5px solid #EDE6DB", borderRadius: 12, cursor: "pointer", color: c.text, fontFamily: "'DM Sans', sans-serif", transition: "all .2s" },
   amountBtnActive: { background: c.goldL, borderColor: c.gold, color: c.goldD },
-  customRow: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 24 },
+  customRow: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 },
   customLabel: { fontSize: 14, color: c.soft },
   customInputWrap: { display: "flex", alignItems: "center", gap: 6 },
   customInput: { width: 90, padding: "10px 12px", fontSize: 16, fontWeight: 600, border: "1.5px solid #EDE6DB", borderRadius: 10, outline: "none", textAlign: "right", fontFamily: "'DM Sans', sans-serif", color: c.text, background: c.card },
   customCurr: { fontSize: 14, color: c.soft, fontWeight: 500 },
+  errorBox: { background: c.errBg, color: c.err, borderRadius: 10, padding: "12px 14px", marginBottom: 16, fontSize: 13, lineHeight: 1.4 },
   donateBtn: { width: "100%", padding: "16px 0", fontSize: 16, fontWeight: 600, background: "linear-gradient(135deg, #C8943E, #8B5E3C)", color: "#fff", border: "none", borderRadius: 14, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", letterSpacing: 0.3 },
   donateBtnOff: { opacity: 0.45, cursor: "default" },
   donateNote: { textAlign: "center", fontSize: 12, color: c.soft, marginTop: 14 },
