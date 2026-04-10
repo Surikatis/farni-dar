@@ -19,9 +19,11 @@ export const allChurches = [
   { id:6,  name:"Kostel Nanebevzetí Panny Marie",         city:"Kladno",             address:"náměstí starosty Pavla 2",        lat:50.1440, lng:14.1040, diocese:"Arcidiecéze pražská",       masses:["Ne 10:00","Čt 18:00"],     pastor:"P. Martin Chleborád",        phone:"" },
   { id:7,  name:"Kostel sv. Václava",           city:"Kladno",             address:"Vašíčkova 466",           lat:50.1410, lng:14.0698, diocese:"Arcidiecéze pražská",       masses:["Ne 08:30","Ostatní dny v 18:00"],              pastor:"P. Jaroslav Kučera",         phone:"" },
 
+  // Lysá nad Labem
+  { id:25, name:"Kostel Narození sv. Jana Křtitele",       city:"Lysá nad Labem",          address:"Nám. Bedřicha Hrozného 7",                  lat:50.0403, lng:15.7697, diocese:"Diecéze královéhradecká",  masses:["Ne 9:30","Ne 10:00","Ostatní dny v 17:00"],     pastor:"Mgr. Pavel Alois Porochnavec",     phone:"" },
+  
   // Beroun
-  { id:8,  name:"Kostel Zvěstování Panny Marie",          city:"Beroun",             address:"Husovo náměstí 54",               lat:49.9674, lng:14.0680, diocese:"Arcidiecéze pražská",       masses:["Ne 9:00","Ne 18:00"],               pastor:"P. Jan Šimek",           phone:"+420 311 621 100" },
-  { id:9,  name:"Kostel sv. Jakuba Staršího",             city:"Beroun",             address:"Tylova ul.",                      lat:49.9640, lng:14.0710, diocese:"Arcidiecéze pražská",       masses:["Ne 10:30","Pá 17:00"],              pastor:"P. Radek Vávra",         phone:"+420 311 622 200" },
+  { id:9,  name:"Kostel sv. Jakuba Staršího",             city:"Beroun",             address:"Seydlovo náměstí 24/5",                      lat:49.9640, lng:14.0710, diocese:"Arcidiecéze pražská",       masses:["Ne 10:00","Ostatní dny v 18:00"],              pastor:"Mgr. Ing. Petr Bouška",         phone:"" },
 
   // Mělník
   { id:10, name:"Chrám sv. Petra a Pavla",                city:"Mělník",             address:"Náměstí Míru 34",                 lat:50.3500, lng:14.4730, diocese:"Arcidiecéze pražská",       masses:["Ne 9:00","Ne 18:00"],               pastor:"P. Václav Fišer",        phone:"+420 315 621 100" },
@@ -53,7 +55,7 @@ export const allChurches = [
   { id:22, name:"Kostel Panny Marie (Dominikáni)",        city:"Hradec Králové",     address:"Střelecká ul. 7",                 lat:50.2070, lng:15.8360, diocese:"Diecéze královéhradecká",  masses:["Ne 8:30","Pá 17:00"],               pastor:"P. Dominik Novotný OP",  phone:"+420 495 513 450" },
   { id:23, name:"Kostel sv. Jana Nepomuckého",            city:"Hradec Králové",     address:"Šimkova ul.",                     lat:50.2110, lng:15.8300, diocese:"Diecéze královéhradecká",  masses:["Ne 10:30","St 18:00"],              pastor:"P. Michal Kadlec",       phone:"+420 495 514 560" },
   { id:24, name:"Kostel sv. Petra a Pavla",               city:"Hradec Králové",     address:"Slezské Předměstí",               lat:50.2050, lng:15.8380, diocese:"Diecéze královéhradecká",  masses:["Ne 9:00","Ne 18:00"],               pastor:"P. Ondřej Čapek",        phone:"+420 495 515 670" },
-
+  
   // Pardubice
   { id:25, name:"Katedrála Zvěstování Panny Marie",       city:"Pardubice",          address:"Zelená brána 1",                  lat:50.0403, lng:15.7697, diocese:"Diecéze královéhradecká",  masses:["Ne 8:00","Ne 10:00","Ne 18:00"],     pastor:"Mons. Karel Herbst",     phone:"+420 466 534 001" },
   { id:26, name:"Kostel sv. Jana Křtitele",               city:"Pardubice",          address:"Palackého tř. 4",                 lat:50.0380, lng:15.7720, diocese:"Diecéze královéhradecká",  masses:["Ne 9:30","St 17:30"],               pastor:"P. Miroslav Hanuš",      phone:"+420 466 535 112" },
