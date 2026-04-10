@@ -20,18 +20,18 @@ export const allChurches = [
   { id:7,  name:"Kostel sv. Václava",           city:"Kladno",             address:"Vašíčkova 466",           lat:50.1410, lng:14.0698, diocese:"Arcidiecéze pražská",       masses:["Ne 08:30","Ostatní dny v 18:00"],              pastor:"P. Jaroslav Kučera",         phone:"" },
 
   // Lysá nad Labem
-  { id:8,  name:"Kostel Narození sv. Jana Křtitele",       city:"Lysá nad Labem",          address:"Nám. Bedřicha Hrozného 7",                  lat:50.2021, lng:14.8383, diocese:"Arcidiecéze pražská",  masses:["Ne 9:30","Ne 10:00","Ostatní dny v 17:00"],     pastor:"Mgr. Pavel Alois Porochnavec",     phone:"" },
+  { id:8,  name:"Kostel Narození sv. Jana Křtitele",       city:"Lysá nad Labem",          address:"Nám. Bedřicha Hrozného 7",                  lat:50.2021, lng:14.8383, diocese:"Arcidiecéze pražská",  masses:["Ne 9:30","Ostatní dny v 17:00"],     pastor:"Mgr. Pavel Alois Porochnavec",     phone:"" },
   
   // Beroun
   { id:9,  name:"Kostel sv. Jakuba Staršího",             city:"Beroun",             address:"Seydlovo náměstí 24/5",                      lat:49.9640, lng:14.0710, diocese:"Arcidiecéze pražská",       masses:["Ne 10:00","Ostatní dny v 18:00"],              pastor:"Mgr. Ing. Petr Bouška",         phone:"" },
 
   // Mělník
-  { id:10, name:"Chrám sv. Petra a Pavla",                city:"Mělník",             address:"Náměstí Míru 34",                 lat:50.3500, lng:14.4730, diocese:"Arcidiecéze pražská",       masses:["Ne 9:00","Ne 18:00"],               pastor:"P. Václav Fišer",        phone:"+420 315 621 100" },
-  { id:11, name:"Kostel Nanebevzetí Panny Marie",         city:"Mělník",             address:"Nádražní ul. 3",                  lat:50.3470, lng:14.4760, diocese:"Arcidiecéze pražská",       masses:["Ne 10:30","St 17:00"],              pastor:"P. Libor Hopp",          phone:"+420 315 622 200" },
+  { id:10, name:"Chrám sv. Petra a Pavla",                city:"Mělník",             address:"Česká",                 lat:50.3500, lng:14.4730, diocese:"Arcidiecéze pražská",       masses:["Ne 9:30"],               pastor:"P. Mirosław Mateńko",        phone:"" },
+  { id:11, name:"kostel Čtrnácti sv. pomocníků",         city:"Mělník",             address:"náměstí Míru 54/20",                  lat:50.3528, lng:14.4745, diocese:"Arcidiecéze pražská",       masses:["Ne 11:30","Ostatní dny v 18:00"],              pastor:"P. Mirosław Mateńko",          phone:"" },
 
   // Benešov
-  { id:12, name:"Kostel Nanebevzetí Panny Marie",         city:"Benešov",            address:"Masarykovo náměstí 102",          lat:49.7820, lng:14.6880, diocese:"Arcidiecéze pražská",       masses:["Ne 9:00","Ne 18:00"],               pastor:"P. Libor Dvořák",        phone:"+420 317 721 100" },
-  { id:13, name:"Kostel sv. Anny",                        city:"Benešov",            address:"Husovo náměstí 1",                lat:49.7790, lng:14.6910, diocese:"Arcidiecéze pražská",       masses:["Ne 10:30","Čt 17:00"],              pastor:"P. Václav Tůma",         phone:"+420 317 722 200" },
+  { id:12, name:"Kostel sv. Mikuláše",         city:"Benešov",            address:"Na Karlově",          lat:49.7847, lng:14.6941, diocese:"Arcidiecéze pražská",       masses:["Ne 08:00","Ne 09:30"],,               pastor:"P. Marcel Timko",        phone:"" },
+  { id:13, name:"Kostel sv. Anny",                        city:"Benešov",            address:"Tyršova",                lat:49.7790, lng:14.6910, diocese:"Arcidiecéze pražská",       masses:["Ne 08:00","Ne 09:30","Ostatní dny v 18:00"],              pastor:"P. Marcel Timko",         phone:"" },
 
   // Rakovník
   { id:14, name:"Kostel sv. Bartoloměje",                 city:"Rakovník",           address:"Husovo náměstí 1",                lat:50.1060, lng:13.7320, diocese:"Arcidiecéze pražská",       masses:["Ne 9:00","Ne 18:00"],               pastor:"P. Jiří Bartoš",         phone:"+420 313 511 100" },
