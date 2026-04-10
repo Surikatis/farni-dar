@@ -30,7 +30,7 @@ export const allChurches = [
   { id:11, name:"kostel Čtrnácti sv. pomocníků",         city:"Mělník",             address:"náměstí Míru 54/20",                  lat:50.3528, lng:14.4745, diocese:"Arcidiecéze pražská",       masses:["Ne 11:30","Ostatní dny v 18:00"],              pastor:"P. Mirosław Mateńko",          phone:"" },
 
   // Benešov
-  { id:12, name:"Kostel sv. Mikuláše",         city:"Benešov",            address:"Na Karlově",          lat:49.7847, lng:14.6941, diocese:"Arcidiecéze pražská",       masses:["Ne 08:00","Ne 09:30"],,               pastor:"P. Marcel Timko",        phone:"" },
+  { id:12, name:"Kostel sv. Mikuláše",         city:"Benešov",            address:"Na Karlově",          lat:49.7847, lng:14.6941, diocese:"Arcidiecéze pražská",       masses:["Ne 08:00","Ne 09:30"],               pastor:"P. Marcel Timko",        phone:"" },
   { id:13, name:"Kostel sv. Anny",                        city:"Benešov",            address:"Tyršova",                lat:49.7790, lng:14.6910, diocese:"Arcidiecéze pražská",       masses:["Ne 08:00","Ne 09:30","Ostatní dny v 18:00"],              pastor:"P. Marcel Timko",         phone:"" },
 
   // Rakovník
