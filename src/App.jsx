@@ -195,7 +195,7 @@ const App = () => {
     <div style={st.splashWrap}><style>{css}</style>
       <div style={st.splashContent}>
         <div style={st.splashIcon}>&#10013;</div>
-        <div style={st.splashTitle}>Farni Dar</div>
+        <div style={st.splashTitle}>Farní Dar</div>
         <div style={st.splashSub}>Podpořte svou farnost</div>
         <div style={st.splashLoader}><div style={st.splashLoaderBar} /></div>
       </div>
@@ -304,7 +304,7 @@ const App = () => {
       <div style={{ ...st.homeWrap, opacity: animateIn ? 1 : 0, transform: animateIn ? "translateY(0)" : "translateY(12px)", transition: "all .45s ease" }}>
         <div style={st.homeHeader}>
           <div style={st.logo}>&#10013;</div>
-          <h1 style={st.homeTitle}>Farni Dar</h1>
+          <h1 style={st.homeTitle}>Farní Dar</h1>
           <p style={st.homeSub}>Najděte svůj kostel. </p>
           <p style={{ fontSize: 12, color: c.soft, marginTop: 4, padding: "0 24px" }}>
             Přispějte platbou online misto hotovostí.
