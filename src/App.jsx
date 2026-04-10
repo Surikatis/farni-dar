@@ -116,14 +116,14 @@ const App = () => {
       markersRef.current.forEach(m => map.removeLayer(m));
       markersRef.current = [];
       const ci = L.divIcon({ html: '<div style="width:30px;height:30px;background:#C8943E;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;font-size:15px">+</div>', iconSize: [30, 30], className: "" });
-      filtered.slice(0, 15).forEach(ch => {
+      filtered.slice(0, 20).forEach(ch => {
         const dist = ch.distance ? formatDist(ch.distance) : "";
         const popup = '<div style="font-family:sans-serif;min-width:170px"><strong>' + ch.name + '</strong><br/><span style="color:#666;font-size:12px">' + ch.city + ' ' + dist + '</span><br/><button onclick="window.__selectChurch(' + ch.id + ')" style="margin-top:8px;padding:7px 16px;background:#C8943E;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600">Otevrit</button></div>';
         const m = L.marker([ch.lat, ch.lng], { icon: ci }).addTo(map).bindPopup(popup);
         markersRef.current.push(m);
       });
       if (filtered.length > 0) {
-        const b = L.latLngBounds(filtered.slice(0, 15).map(ch => [ch.lat, ch.lng]));
+        const b = L.latLngBounds(filtered.slice(0, 20).map(ch => [ch.lat, ch.lng]));
         b.extend([userLoc.lat, userLoc.lng]);
         map.fitBounds(b, { padding: [40, 40] });
       }
