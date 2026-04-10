@@ -16,8 +16,8 @@ export const allChurches = [
   { id:5,  name:"Kostel sv. Ignáce z Loyoly",                      city:"Praha",              address:" Ječná 505/2",               lat:50.0752, lng:14.4196, diocese:"Arcidiecéze pražská",       masses:["Ne 9:00","Ne 11:00","Po–So 17:30"], pastor:"P. František Hylmar SJ",     phone:"" },
 
   // Kladno
-  { id:6,  name:"Kostel Nanebevzetí Panny Marie",         city:"Kladno",             address:"náměstí starosty Pavla 8",        lat:50.1440, lng:14.1040, diocese:"Arcidiecéze pražská",       masses:["Ne 9:00","Ne 18:00","St 17:30"],     pastor:"P. Marek Drábek",        phone:"+420 312 681 100" },
-  { id:7,  name:"Kostel sv. Cyrila a Metoděje",           city:"Kladno",             address:"Cyrila a Metoděje ul.",           lat:50.1410, lng:14.1070, diocese:"Arcidiecéze pražská",       masses:["Ne 10:30","Čt 17:00"],              pastor:"P. Josef Říčan",         phone:"+420 312 682 200" },
+  { id:6,  name:"Kostel Nanebevzetí Panny Marie",         city:"Kladno",             address:"náměstí starosty Pavla 2",        lat:50.1440, lng:14.1040, diocese:"Arcidiecéze pražská",       masses:["Ne 10:00","Čt 18:00"],     pastor:"P. Martin Chleborád",        phone:"" },
+  { id:7,  name:"Kostel sv. Václava",           city:"Kladno",             address:"Vašíčkova 466",           lat:50.1410, lng:14.0698, diocese:"Arcidiecéze pražská",       masses:["Ne 08:30","Ostatní dny v 18:00"],              pastor:"P. Jaroslav Kučera",         phone:"" },
 
   // Beroun
   { id:8,  name:"Kostel Zvěstování Panny Marie",          city:"Beroun",             address:"Husovo náměstí 54",               lat:49.9674, lng:14.0680, diocese:"Arcidiecéze pražská",       masses:["Ne 9:00","Ne 18:00"],               pastor:"P. Jan Šimek",           phone:"+420 311 621 100" },
