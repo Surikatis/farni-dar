@@ -20,7 +20,7 @@ export const allChurches = [
   { id:7,  name:"Kostel sv. Václava",           city:"Kladno",             address:"Vašíčkova 466",           lat:50.1410, lng:14.0698, diocese:"Arcidiecéze pražská",       masses:["Ne 08:30","Ostatní dny v 18:00"],              pastor:"P. Jaroslav Kučera",         phone:"" },
 
   // Lysá nad Labem
-  { id:25, name:"Kostel Narození sv. Jana Křtitele",       city:"Lysá nad Labem",          address:"Nám. Bedřicha Hrozného 7",                  lat:50.0403, lng:15.7697, diocese:"Diecéze královéhradecká",  masses:["Ne 9:30","Ne 10:00","Ostatní dny v 17:00"],     pastor:"Mgr. Pavel Alois Porochnavec",     phone:"" },
+  { id:8,  name:"Kostel Narození sv. Jana Křtitele",       city:"Lysá nad Labem",          address:"Nám. Bedřicha Hrozného 7",                  lat:50.2021, lng:14.8383, diocese:"Arcidiecéze pražská",  masses:["Ne 9:30","Ne 10:00","Ostatní dny v 17:00"],     pastor:"Mgr. Pavel Alois Porochnavec",     phone:"" },
   
   // Beroun
   { id:9,  name:"Kostel sv. Jakuba Staršího",             city:"Beroun",             address:"Seydlovo náměstí 24/5",                      lat:49.9640, lng:14.0710, diocese:"Arcidiecéze pražská",       masses:["Ne 10:00","Ostatní dny v 18:00"],              pastor:"Mgr. Ing. Petr Bouška",         phone:"" },
