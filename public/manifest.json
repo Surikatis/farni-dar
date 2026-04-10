@@ -1,7 +1,7 @@
 {
   "name": "Farní Dar",
   "short_name": "Farní Dar",
-  "description": "Podpořte svou farnost jednoduše",
+  "description": "Podpořte svou farnost",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FAF6F1",
