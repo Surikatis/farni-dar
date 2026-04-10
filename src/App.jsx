@@ -196,7 +196,7 @@ const App = () => {
       <div style={st.splashContent}>
         <div style={st.splashIcon}>&#10013;</div>
         <div style={st.splashTitle}>Farni Dar</div>
-        <div style={st.splashSub}>Podporte svou farnost jednoduše</div>
+        <div style={st.splashSub}>Podpořte svou farnost</div>
         <div style={st.splashLoader}><div style={st.splashLoaderBar} /></div>
       </div>
     </div>
@@ -305,9 +305,9 @@ const App = () => {
         <div style={st.homeHeader}>
           <div style={st.logo}>&#10013;</div>
           <h1 style={st.homeTitle}>Farni Dar</h1>
-          <p style={st.homeSub}>Podporte svou farnost platbou z mobilu.</p>
+          <p style={st.homeSub}>Najděte svůj kostel. </p>
           <p style={{ fontSize: 12, color: c.soft, marginTop: 4, padding: "0 24px" }}>
-            Najdete svuj kostel a prispejte par kliknutimi misto hotovosti.
+            Přispějte platbou online misto hotovostí.
           </p>
         </div>
         <div style={st.bottomNav}>
@@ -377,7 +377,7 @@ const App = () => {
         ) : (
           <>
             <div style={st.searchWrap}>
-              <input type="text" placeholder="Hledat kostel nebo mesto..." value={search}
+              <input type="text" placeholder="Najít kostel nebo město..." value={search}
                 onChange={e => setSearch(e.target.value)} style={st.searchInput} />
               {search && <button onClick={() => setSearch("")} style={st.clearBtn}>&#10005;</button>}
             </div>
@@ -393,8 +393,8 @@ const App = () => {
               <div style={st.listWrap}>
                 {filtered.length === 0 ? (
                   <div style={st.empty}>
-                    <p style={{ fontSize: 16 }}>Zadny kostel nenalezen</p>
-                    <p style={{ fontSize: 13, opacity: 0.6, marginTop: 4 }}>Zkuste jiny nazev nebo mesto</p>
+                    <p style={{ fontSize: 16 }}>Kostel nenalezen</p>
+                    <p style={{ fontSize: 13, opacity: 0.6, marginTop: 4 }}>Zkuste jiný název nebo zadejte město</p>
                   </div>
                 ) : filtered.map((ch, i) => (
                   <button key={ch.id} onClick={() => { setSelectedChurch(ch); setActiveTab("dar"); }}
