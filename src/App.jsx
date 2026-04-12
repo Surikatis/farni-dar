@@ -279,7 +279,7 @@ const App = () => {
               { icon: "\u{1F464}", label: "Farar", val: selectedChurch.pastor },
               { icon: "\u{1F550}", label: "Bohosluzby", val: selectedChurch.masses },
               { icon: "\u{1F4CD}", label: "Adresa", val: selectedChurch.address + ", " + selectedChurch.city },
-              { icon: "\u{1F4DE}", label: "Telefon", val: selectedChurch.phone },
+              { icon: "\u{1F4DE}", label: "Web", val: selectedChurch.phone },
               { icon: "\u26EA", label: "Dieceze", val: selectedChurch.diocese },
             ].map((item, i) => (
               <div key={i} style={st.infoCard}>
