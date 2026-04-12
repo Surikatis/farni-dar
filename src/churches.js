@@ -14,7 +14,7 @@ export const allChurches = [
 
   // Praha – 5 kostelů ✅
   { id:1,  name:"Katedrála sv. Víta, Václava a Vojtěcha", city:"Praha", address:"III. nádvoří 48/2, Hradčany", lat:50.0909, lng:14.4006, diocese:"Arcidiecéze pražská", masses:["Ne 08:30","Ne 10:00","Po–So 07:00","Po–So 18:00"], pastor:"Mons. Jan Balík", phone:"" },
-  { id:2,  name:"Bazilika sv. Petra a Pavla (Vyšehrad)", city:"Praha", address:"K Rotundě 10, Praha 2", lat:50.0644, lng:14.4177, diocese:"Arcidiecéze pražská", masses:["Ne 09:00","Ne 09:30","Ostatní dny 18:00"], pastor:"Mons. Michal Němeček", phone:"" },
+  { id:2,  name:"Bazilika sv. Petra a Pavla (Vyšehrad)", city:"Praha", address:"K Rotundě 10, Praha 2", lat:50.0644, lng:14.4177, diocese:"Arcidiecéze pražská", masses:["Ne 09:00", "Ostatní dny 18:00"], pastor:"Mons. Michal Němeček", phone:"" },
   { id:3,  name:"Kostel sv. Mikuláše (Malá Strana)", city:"Praha", address:"Malostranské náměstí 29, Praha 1", lat:50.0879, lng:14.4033, diocese:"Arcidiecéze pražská", masses:["Ne 10:00 (česky)","Ne 12:00 (slovensky)","Ne 20:30 (česky)"], pastor:"P. Lukáš Lipenský", phone:"+420 257 534 215" },
   { id:4,  name:"Kostel Nejsvětějšího Srdce Páně", city:"Praha", address:"náměstí Jiřího z Poděbrad 19, Praha 3", lat:50.0775, lng:14.4536, diocese:"Arcidiecéze pražská", masses:["Ne 09:00","Ne 11:00","Ne 18:00","Po–So 08:00","Po–So 18:00"], pastor:"P. Jan Houkal", phone:"" },
   { id:5,  name:"Kostel sv. Ignáce z Loyoly", city:"Praha", address:"Ječná 505/2, Praha 2", lat:50.0752, lng:14.4196, diocese:"Arcidiecéze pražská", masses:["Ne 09:00","Ne 11:00","Ne 18:00","Po–So 17:30"], pastor:"P. František Hylmar SJ", phone:"" },
@@ -39,66 +39,66 @@ export const allChurches = [
 
   // Rakovník ✅ (ověřeno z rkfrakovnik.cz)
   { id:14, name:"Kostel sv. Bartoloměje", city:"Rakovník", address:"V Hradbách 189,, Rakovník", lat:50.1037, lng:13.7331, diocese:"Arcidiecéze pražská", masses:["Ne 08:00","Ne 18:00","Út Čt Pá 17:30","St 07:00","So 08:00"], pastor:"P. Vojtěch Novák", web:"" },
-  { id:15, name:"Kostel Nejsvětější Trojice", city:"Rakovník", address:"Vysoká ul., Rakovník", lat:50.1030, lng:13.7350, diocese:"Arcidiecéze pražská", masses:["příležitostně – viz web farnosti"], pastor:"P. Vojtěch Novák", phone:"+420 737 211 101" },
+  { id:15, name:"Kostel Nejsvětější Trojice", city:"Rakovník", address:"Vysoká ul., Rakovník", lat:50.1030, lng:13.7350, diocese:"Arcidiecéze pražská", masses:["příležitostně – viz web farnosti"], pastor:"P. Vojtěch Novák", web:"" },
 
   // Kralupy nad Vltavou ✅ (ověřeno z farnostkralupy.cz)
-  { id:16, name:"Kostel Nanebevzetí PM a sv. Václava", city:"Kralupy nad Vltavou", address:"Palackého náměstí, Kralupy nad Vltavou", lat:50.2400, lng:14.3130, diocese:"Arcidiecéze pražská", masses:["Ne 09:30","Út 17:30","Pá 17:30"], pastor:"R.D. Martin Sklenář", phone:"+420 728 384 833" },
-  { id:17, name:"Kostel sv. Václava (Velvary)", city:"Kralupy nad Vltavou", address:"ul. Karla Krohna, Velvary", lat:50.2807, lng:14.2383, diocese:"Arcidiecéze pražská", masses:["Ne 08:00"], pastor:"R.D. Martin Sklenář", phone:"+420 728 384 833" },
+  { id:16, name:"Kostel Nanebevzetí PM a sv. Václava", city:"Kralupy nad Vltavou", address:"Palackého náměstí, Kralupy nad Vltavou", lat:50.2400, lng:14.3130, diocese:"Arcidiecéze pražská", masses:["Ne 09:30","Út 17:30","Pá 17:30"], pastor:"R.D. Martin Sklenář", web:"" },
+  { id:17, name:"Kostel sv. Václava (Velvary)", city:"Kralupy nad Vltavou", address:"ul. Karla Krohna, Velvary", lat:50.2807, lng:14.2383, diocese:"Arcidiecéze pražská", masses:["Ne 08:00"], pastor:"R.D. Martin Sklenář", web:"" },
 
   // Brandýs nad Labem ✅ (ověřeno z farnost-brandys.cz)
-  { id:18, name:"Kostel Obrácení sv. Pavla", city:"Brandýs nad Labem", address:"ul. F. X. Procházky 24/7, Brandýs nad Labem", lat:50.1870, lng:14.6630, diocese:"Arcidiecéze pražská", masses:["Ne 09:00","Po–So 18:30"], pastor:"P. Milan Kačaljak", phone:"+420 602 765 609" },
-  { id:19, name:"Bazilika Nanebevzetí PM (Stará Boleslav)", city:"Brandýs nad Labem", address:"nám. Sv. Václava, Stará Boleslav", lat:50.1840, lng:14.6660, diocese:"Arcidiecéze pražská", masses:["Ne 08:00","Ne 10:30","Ne 15:00"], pastor:"P. Libor Bulín", phone:"+420 602 542 847" },
+  { id:18, name:"Kostel Obrácení sv. Pavla", city:"Brandýs nad Labem", address:"ul. F. X. Procházky 24/7, Brandýs nad Labem", lat:50.1870, lng:14.6630, diocese:"Arcidiecéze pražská", masses:["Ne 09:00","Po–So 18:30"], pastor:"P. Milan Kačaljak", web:"" },
+  { id:19, name:"Bazilika Nanebevzetí PM (Stará Boleslav)", city:"Brandýs nad Labem", address:"nám. Sv. Václava, Stará Boleslav", lat:50.1840, lng:14.6660, diocese:"Arcidiecéze pražská", masses:["Ne 08:00","Ne 10:30","Ne 15:00"], pastor:"P. Libor Bulín", web:"" },
 
   // Nymburk ✅ (ověřeno z katalogu AP a nymburk.farnost.cz)
-  { id:35, name:"Kostel sv. Jiljí", city:"Nymburk", address:"Kostelní náměstí, Nymburk", lat:50.1861, lng:15.0419, diocese:"Arcidiecéze pražská", masses:["Ne 09:00 (kostel)","Pá 18:00 (kostel)","Po Čt 08:00 (fara)"], pastor:"Mgr. Jaroslav Krajl", phone:"+420 604 365 237" },
-  { id:36, name:"Kostel Nanebevzetí Panny Marie (Poděbrady)", city:"Poděbrady", address:"Jiřího náměstí, Poděbrady", lat:50.1425, lng:15.1189, diocese:"Arcidiecéze pražská", masses:["Ne 09:00","St 17:00"], pastor:"P. Daniel Kopeček", phone:"+420 325 612 330" },
+  { id:35, name:"Kostel sv. Jiljí", city:"Nymburk", address:"Kostelní náměstí, Nymburk", lat:50.1861, lng:15.0419, diocese:"Arcidiecéze pražská", masses:["Ne 09:00 (kostel)","Pá 18:00 (kostel)","Po Čt 08:00 (fara)"], pastor:"Mgr. Jaroslav Krajl", web:"" },
+  { id:36, name:"Kostel Nanebevzetí Panny Marie (Poděbrady)", city:"Poděbrady", address:"Jiřího náměstí, Poděbrady", lat:50.1425, lng:15.1189, diocese:"Arcidiecéze pražská", masses:["Ne 09:00","St 17:00"], pastor:"P. Daniel Kopeček", web:"" },
 
   // ═══════════════════════════════════════════════════════════
   // DIECÉZE KRÁLOVÉHRADECKÁ
   // ═══════════════════════════════════════════════════════════
 
   // Hradec Králové – 5 kostelů ⚠️
-  { id:20, name:"Katedrála sv. Ducha", city:"Hradec Králové", address:"Velké náměstí 37, Hradec Králové", lat:50.2091, lng:15.8336, diocese:"Diecéze královéhradecká", masses:["Ne 08:00","Ne 10:00","Ne 18:00","Po–Pá 07:00","Po–Pá 18:00"], pastor:"Mons. Jan Vokál", phone:"+420 495 581 001" },
-  { id:21, name:"Kostel Nanebevzetí PM (Piaristé)", city:"Hradec Králové", address:"Eliščino nábřeží 1, Hradec Králové", lat:50.2100, lng:15.8320, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 11:00","Čt 17:30"], pastor:"P. Jan Hradil", phone:"+420 495 512 340" },
-  { id:22, name:"Kostel Panny Marie Nanebevzaté (Redemptoristé)", city:"Hradec Králové", address:"Střelecká ul. 7, Hradec Králové", lat:50.2070, lng:15.8360, diocese:"Diecéze královéhradecká", masses:["Ne 08:30","Ne 10:30","Pá 17:00"], pastor:"P. Jiří Šlégr CSsR", phone:"+420 495 513 450" },
+  { id:20, name:"Katedrála sv. Ducha", city:"Hradec Králové", address:"Velké náměstí 37, Hradec Králové", lat:50.2091, lng:15.8336, diocese:"Diecéze královéhradecká", masses:["Ne 08:00","Ne 10:00","Ne 18:00","Po–Pá 07:00","Po–Pá 18:00"], pastor:"Mons. Jan Vokál", web:"" },
+  { id:21, name:"Kostel Nanebevzetí PM (Piaristé)", city:"Hradec Králové", address:"Eliščino nábřeží 1, Hradec Králové", lat:50.2100, lng:15.8320, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 11:00","Čt 17:30"], pastor:"P. Jan Hradil", web:"" },
+  { id:22, name:"Kostel Panny Marie Nanebevzaté (Redemptoristé)", city:"Hradec Králové", address:"Střelecká ul. 7, Hradec Králové", lat:50.2070, lng:15.8360, diocese:"Diecéze královéhradecká", masses:["Ne 08:30","Ne 10:30","Pá 17:00"], pastor:"P. Jiří Šlégr CSsR", web:"" },
   { id:23, name:"Kostel sv. Jana Nepomuckého", city:"Hradec Králové", address:"Šimkova ul., Hradec Králové", lat:50.2110, lng:15.8300, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","St 18:00"], pastor:"P. Michal Kadlec", phone:"" },
   { id:24, name:"Kostel sv. Petra a Pavla (Pouchov)", city:"Hradec Králové", address:"Pouchov, Hradec Králové", lat:50.2150, lng:15.8500, diocese:"Diecéze královéhradecká", masses:["Ne 09:00"], pastor:"P. Ondřej Čapek", phone:"" },
 
   // Pardubice ✅ (ověřeno z farnost-pardubice.cz a bihk.cz)
-  { id:25, name:"Kostel sv. Bartoloměje (arciděkanský)", city:"Pardubice", address:"nám. Republiky 53, Pardubice", lat:50.0403, lng:15.7697, diocese:"Diecéze královéhradecká", masses:["Ne 08:00","Ne 10:00","Ne 18:00","Po–Pá 17:30"], pastor:"P. Jan Uhlíř", phone:"+420 466 534 001" },
-  { id:26, name:"Kostel sv. Václava (Salesiáni)", city:"Pardubice", address:"Zborovského náměstí, Pardubice", lat:50.0380, lng:15.7720, diocese:"Diecéze královéhradecká", masses:["Ne 09:30","St 19:30 (studentská)"], pastor:"P. Jiří Caha SDB", phone:"+420 466 535 112" },
+  { id:25, name:"Kostel sv. Bartoloměje (arciděkanský)", city:"Pardubice", address:"nám. Republiky 53, Pardubice", lat:50.0403, lng:15.7697, diocese:"Diecéze královéhradecká", masses:["Ne 08:00","Ne 10:00","Ne 18:00","Po–Pá 17:30"], pastor:"P. Jan Uhlíř", web:"" },
+  { id:26, name:"Kostel sv. Václava (Salesiáni)", city:"Pardubice", address:"Zborovského náměstí, Pardubice", lat:50.0380, lng:15.7720, diocese:"Diecéze královéhradecká", masses:["Ne 09:30","St 19:30 (studentská)"], pastor:"P. Jiří Caha SDB", web:"" },
 
   // Kolín ✅ (ověřeno z farnostkolin.cz a katalogu AP)
-  { id:27, name:"Kostel sv. Bartoloměje", city:"Kolín", address:"Brandlova 25, Kolín", lat:50.0280, lng:15.2000, diocese:"Diecéze královéhradecká", masses:["Ne 08:00","Ne 10:00","St 17:30"], pastor:"P. Libor Bulín", phone:"+420 321 721 414" },
-  { id:28, name:"Kostel Nejsvětější Trojice", city:"Kolín", address:"Kutnohorská ul., Kolín IV", lat:50.0250, lng:15.2030, diocese:"Diecéze královéhradecká", masses:["Ne 09:30","Pá 17:00"], pastor:"P. Ján Halama SVD", phone:"+420 604 294 247" },
+  { id:27, name:"Kostel sv. Bartoloměje", city:"Kolín", address:"Brandlova 25, Kolín", lat:50.0280, lng:15.2000, diocese:"Diecéze královéhradecká", masses:["Ne 08:00","Ne 10:00","St 17:30"], pastor:"P. Libor Bulín", web:"" },
+  { id:28, name:"Kostel Nejsvětější Trojice", city:"Kolín", address:"Kutnohorská ul., Kolín IV", lat:50.0250, lng:15.2030, diocese:"Diecéze královéhradecká", masses:["Ne 09:30","Pá 17:00"], pastor:"P. Ján Halama SVD", web:"" },
 
   // Náchod ⚠️
-  { id:29, name:"Kostel sv. Vavřince", city:"Náchod", address:"Masarykovo náměstí 1, Náchod", lat:50.4169, lng:16.1640, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 18:00","Pá 17:30"], pastor:"P. Jiří Neuman", phone:"+420 491 421 100" },
-  { id:30, name:"Kostel sv. Michala (Piárotsté)", city:"Náchod", address:"Plhov, Náchod", lat:50.4140, lng:16.1670, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","St 17:00"], pastor:"P. Pavel Mašát", phone:"+420 491 422 200" },
+  { id:29, name:"Kostel sv. Vavřince", city:"Náchod", address:"Masarykovo náměstí 1, Náchod", lat:50.4169, lng:16.1640, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 18:00","Pá 17:30"], pastor:"P. Jiří Neuman", web:"" },
+  { id:30, name:"Kostel sv. Michala (Piárotsté)", city:"Náchod", address:"Plhov, Náchod", lat:50.4140, lng:16.1670, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","St 17:00"], pastor:"P. Pavel Mašát", web:"" },
 
   // Trutnov ⚠️
-  { id:31, name:"Kostel Nanebevzetí Panny Marie", city:"Trutnov", address:"Krakonošovo náměstí 1, Trutnov", lat:50.5603, lng:15.9120, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 18:00","Út Čt Pá 17:30"], pastor:"P. Radek Bulvas", phone:"+420 499 811 100" },
-  { id:32, name:"Kostel sv. Jana Nepomuckého (Horní Předměstí)", city:"Trutnov", address:"Jana Palacha ul., Trutnov", lat:50.5570, lng:15.9150, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","St 17:00"], pastor:"P. Jiří Lukáš", phone:"+420 499 812 200" },
+  { id:31, name:"Kostel Nanebevzetí Panny Marie", city:"Trutnov", address:"Krakonošovo náměstí 1, Trutnov", lat:50.5603, lng:15.9120, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 18:00","Út Čt Pá 17:30"], pastor:"P. Radek Bulvas", web:"" },
+  { id:32, name:"Kostel sv. Jana Nepomuckého (Horní Předměstí)", city:"Trutnov", address:"Jana Palacha ul., Trutnov", lat:50.5570, lng:15.9150, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","St 17:00"], pastor:"P. Jiří Lukáš", web:"" },
 
   // Chrudim ⚠️
-  { id:33, name:"Kostel Nanebevzetí Panny Marie", city:"Chrudim", address:"Resselovo náměstí 1, Chrudim", lat:49.9510, lng:15.7960, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 18:00","Út St Pá 17:30"], pastor:"P. Radoslav Novák", phone:"+420 469 621 100" },
-  { id:34, name:"Kostel sv. Josefa", city:"Chrudim", address:"Palackého ul. 5, Chrudim", lat:49.9480, lng:15.7990, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","Čt 17:00"], pastor:"P. Martin Kořínek", phone:"+420 469 622 200" },
+  { id:33, name:"Kostel Nanebevzetí Panny Marie", city:"Chrudim", address:"Resselovo náměstí 1, Chrudim", lat:49.9510, lng:15.7960, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 18:00","Út St Pá 17:30"], pastor:"P. Radoslav Novák", web:"" },
+  { id:34, name:"Kostel sv. Josefa", city:"Chrudim", address:"Palackého ul. 5, Chrudim", lat:49.9480, lng:15.7990, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","Čt 17:00"], pastor:"P. Martin Kořínek", web:"" },
 
   // Jičín ⚠️
-  { id:37, name:"Kostel sv. Jakuba Staršího", city:"Jičín", address:"Valdštejnovo náměstí 1, Jičín", lat:50.4368, lng:15.3640, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 18:00","Po–Pá 17:30"], pastor:"P. Pavel Šimek", phone:"+420 493 531 100" },
-  { id:38, name:"Kostel sv. Ignáce (Jezuité)", city:"Jičín", address:"Žižkovo náměstí 1, Jičín", lat:50.4340, lng:15.3670, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","Pá 17:00"], pastor:"P. Ondřej Hora", phone:"+420 493 532 200" },
+  { id:37, name:"Kostel sv. Jakuba Staršího", city:"Jičín", address:"Valdštejnovo náměstí 1, Jičín", lat:50.4368, lng:15.3640, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 18:00","Po–Pá 17:30"], pastor:"P. Pavel Šimek", web:"" },
+  { id:38, name:"Kostel sv. Ignáce (Jezuité)", city:"Jičín", address:"Žižkovo náměstí 1, Jičín", lat:50.4340, lng:15.3670, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","Pá 17:00"], pastor:"P. Ondřej Hora", web:"" },
 
   // Kutná Hora ⚠️
-  { id:39, name:"Chrám sv. Barbory", city:"Kutná Hora", address:"Barborská ul. 28, Kutná Hora", lat:49.9447, lng:15.2639, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 17:00"], pastor:"P. Petr Svoboda", phone:"+420 327 515 796" },
-  { id:40, name:"Kostel sv. Jakuba Staršího", city:"Kutná Hora", address:"Jakubská ul. 1, Kutná Hora", lat:49.9480, lng:15.2670, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","St 17:00"], pastor:"P. Tomáš Sýkora", phone:"+420 327 516 890" },
+  { id:39, name:"Chrám sv. Barbory", city:"Kutná Hora", address:"Barborská ul. 28, Kutná Hora", lat:49.9447, lng:15.2639, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 17:00"], pastor:"P. Petr Svoboda", web:"" },
+  { id:40, name:"Kostel sv. Jakuba Staršího", city:"Kutná Hora", address:"Jakubská ul. 1, Kutná Hora", lat:49.9480, lng:15.2670, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","St 17:00"], pastor:"P. Tomáš Sýkora", web:"" },
 
   // Svitavy ⚠️
-  { id:41, name:"Kostel Nanebevzetí Panny Marie", city:"Svitavy", address:"náměstí Míru 3, Svitavy", lat:49.7596, lng:16.4680, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 18:00","Út Čt Pá 17:30"], pastor:"P. Jiří Hanuš", phone:"+420 461 531 100" },
-  { id:42, name:"Kostel sv. Jošta", city:"Svitavy", address:"Purkyňova ul. 1, Svitavy", lat:49.7560, lng:16.4710, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","Pá 17:00"], pastor:"P. Pavel Fišer", phone:"+420 461 532 200" },
+  { id:41, name:"Kostel Nanebevzetí Panny Marie", city:"Svitavy", address:"náměstí Míru 3, Svitavy", lat:49.7596, lng:16.4680, diocese:"Diecéze královéhradecká", masses:["Ne 09:00","Ne 18:00","Út Čt Pá 17:30"], pastor:"P. Jiří Hanuš", web:"" },
+  { id:42, name:"Kostel sv. Jošta", city:"Svitavy", address:"Purkyňova ul. 1, Svitavy", lat:49.7560, lng:16.4710, diocese:"Diecéze královéhradecká", masses:["Ne 10:30","Pá 17:00"], pastor:"P. Pavel Fišer", web:"" },
 
   // Poděbrady ⚠️
-  { id:43, name:"Kostel Povýšení sv. Kříže", city:"Poděbrady", address:"Jiřího náměstí 1, Poděbrady", lat:50.1425, lng:15.1189, diocese:"Arcidiecéze pražská", masses:["Ne 09:30","St 17:00"], pastor:"P. Daniel Kopeček", phone:"+420 325 612 330" },
-  { id:44, name:"Kostel sv. Bonaventury (Francisci)", city:"Poděbrady", address:"Bonaventurova ul., Poděbrady", lat:50.1390, lng:15.1220, diocese:"Arcidiecéze pražská", masses:["Ne 10:30","Čt 17:00"], pastor:"P. Miroslav Beneš", phone:"+420 325 613 440" },
+  { id:43, name:"Kostel Povýšení sv. Kříže", city:"Poděbrady", address:"Jiřího náměstí 1, Poděbrady", lat:50.1425, lng:15.1189, diocese:"Arcidiecéze pražská", masses:["Ne 09:30","St 17:00"], pastor:"P. Daniel Kopeček", web:"" },
+  { id:44, name:"Kostel sv. Bonaventury", city:"Poděbrady", address:"Bonaventurova ul., Poděbrady", lat:50.1390, lng:15.1220, diocese:"Arcidiecéze pražská", masses:["Ne 10:30","Čt 17:00"], pastor:"P. Miroslav Beneš", web:"" },
 
   // ═══════════════════════════════════════════════════════════
   // ARCIDIECÉZE OLOMOUCKÁ
