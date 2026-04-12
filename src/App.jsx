@@ -222,13 +222,13 @@ const App = () => {
           {["dar", "info"].map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)}
               style={{ ...st.tab, ...(activeTab === tab ? st.tabActive : {}) }}>
-              {tab === "dar" ? "Prispět" : "O farnosti"}
+              {tab === "dar" ? "Přispět" : "O farnosti"}
             </button>
           ))}
         </div>
         {activeTab === "dar" ? (
           <div style={st.donateSection}>
-            <p style={st.donateLabel}>Vyberte castku:</p>
+            <p style={st.donateLabel}>Vyberte částku:</p>
             <div style={st.amountGrid}>
               {amounts.map(a => (
                 <button key={a} onClick={() => { setSelectedAmount(a); setCustomAmount(""); setPaymentError(null); }}
@@ -238,7 +238,7 @@ const App = () => {
               ))}
             </div>
             <div style={st.customRow}>
-              <span style={st.customLabel}>Jina castka:</span>
+              <span style={st.customLabel}>Jiná částka:</span>
               <div style={st.customInputWrap}>
                 <input type="number" placeholder="0" value={customAmount}
                   onChange={e => { setCustomAmount(e.target.value); setSelectedAmount(null); setPaymentError(null); }}
