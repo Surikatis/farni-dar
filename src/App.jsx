@@ -222,7 +222,7 @@ const App = () => {
           {["dar", "info"].map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)}
               style={{ ...st.tab, ...(activeTab === tab ? st.tabActive : {}) }}>
-              {tab === "dar" ? "Prispet" : "O farnosti"}
+              {tab === "dar" ? "Prispět" : "O farnosti"}
             </button>
           ))}
         </div>
