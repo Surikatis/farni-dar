@@ -147,6 +147,7 @@ const App = () => {
   }, [churches]);
 
   const finalAmount = selectedAmount || (customAmount ? parseInt(customAmount) : 0);
+const amountValid = finalAmount >= 20;
 
   // ─── SKUTEČNÁ PLATBA PŘES PAYU ───────────────────────────────────────────
   const handleDonate = async () => {
@@ -240,7 +241,7 @@ const App = () => {
             <div style={st.customRow}>
               <span style={st.customLabel}>Jiná částka:</span>
               <div style={st.customInputWrap}>
-                <input type="number" placeholder="0" value={customAmount}
+                <input type="number" placeholder="20" min="20" value={customAmount}
                   onChange={e => { setCustomAmount(e.target.value); setSelectedAmount(null); setPaymentError(null); }}
                   style={st.customInput} />
                 <span style={st.customCurr}>Kc</span>
@@ -256,7 +257,7 @@ const App = () => {
 
             <button
               onClick={handleDonate}
-              disabled={finalAmount <= 0 || paymentLoading}
+              disabled={!amountValid || paymentLoading}
               style={{ ...st.donateBtn, ...(finalAmount <= 0 || paymentLoading ? st.donateBtnOff : {}) }}
             >
               {paymentLoading
