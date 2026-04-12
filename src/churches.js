@@ -38,7 +38,7 @@ export const allChurches = [
   { id:13, name:"Kostel sv. Anny", city:"Benešov", address:"Tyršova ul., Benešov", lat:49.7790, lng:14.6910, diocese:"Arcidiecéze pražská", masses:["Ne 08:00","Ne 09:30","Ostatní dny 18:00"], pastor:"P. Marcel Timko", phone:"" },
 
   // Rakovník ✅ (ověřeno z rkfrakovnik.cz)
-  { id:14, name:"Kostel sv. Bartoloměje", city:"Rakovník", address:"nám. J. Žižky, Rakovník", lat:50.1037, lng:13.7331, diocese:"Arcidiecéze pražská", masses:["Ne 08:00","Ne 18:00","Út Čt Pá 17:30","St 07:00","So 08:00"], pastor:"P. Vojtěch Novák", phone:"+420 737 211 101" },
+  { id:14, name:"Kostel sv. Bartoloměje", city:"Rakovník", address:"V Hradbách 189,, Rakovník", lat:50.1037, lng:13.7331, diocese:"Arcidiecéze pražská", masses:["Ne 08:00","Ne 18:00","Út Čt Pá 17:30","St 07:00","So 08:00"], pastor:"P. Vojtěch Novák", web:"" },
   { id:15, name:"Kostel Nejsvětější Trojice", city:"Rakovník", address:"Vysoká ul., Rakovník", lat:50.1030, lng:13.7350, diocese:"Arcidiecéze pražská", masses:["příležitostně – viz web farnosti"], pastor:"P. Vojtěch Novák", phone:"+420 737 211 101" },
 
   // Kralupy nad Vltavou ✅ (ověřeno z farnostkralupy.cz)
