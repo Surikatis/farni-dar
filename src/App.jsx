@@ -260,11 +260,11 @@ const amountValid = finalAmount >= 20;
               disabled={!amountValid || paymentLoading}
               style={{ ...st.donateBtn, ...(finalAmount <= 0 || paymentLoading ? st.donateBtnOff : {}) }}
             >
-              {paymentLoading
-                ? "Přesměrovávám na platební bránu…"
-                : finalAmount > 0
-                  ? `Darovat ${finalAmount} Kč`
-                  : "Vyberte částku"}
+             {paymentLoading
+    ? "Přesměrovávám na platební bránu…"
+    : amountValid
+      ? `Darovat ${finalAmount} Kč`
+      : "Minimální příspěvek je 20 Kč"}
             </button>
 
             <div style={st.paymentRefBox}>
