@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "cz.farnidar.twa",
+        "sha256_cert_fingerprints": ["F8:E9:13:83:ED:6E:86:4B:6D:AE:5C:C5:B8:25:50:5B:91:0F:CD:58:E3:77:C2:B5:6F:E0:CC:47:71:6B:7F:98"]
+      }
+    }]
