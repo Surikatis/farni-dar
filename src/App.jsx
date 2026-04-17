@@ -117,7 +117,7 @@ const App = () => {
       const ci = L.divIcon({ html: '<div style="width:30px;height:30px;background:#C8943E;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;font-size:15px">+</div>', iconSize: [30, 30], className: "" });
       filtered.slice(0, 20).forEach(ch => {
         const dist = ch.distance ? formatDist(ch.distance) : "";
-        const popup = '<div style="font-family:sans-serif;min-width:170px"><strong>' + ch.name + '</strong><br/><span style="color:#666;font-size:12px">' + ch.city + ' ' + dist + '</span><br/><button onclick="window.__selectChurch(' + ch.id + ')" style="margin-top:8px;padding:7px 16px;background:#C8943E;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600">Otevrit</button></div>';
+        const popup = '<div style="font-family:sans-serif;min-width:170px"><strong>' + ch.name + '</strong><br/><span style="color:#666;font-size:12px">' + ch.city + ' ' + dist + '</span><br/><button onclick="window.__selectChurch(' + ch.id + ')" style="margin-top:8px;padding:7px 16px;background:#C8943E;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600">Otev\u0159it</button></div>';
         const m = L.marker([ch.lat, ch.lng], { icon: ci }).addTo(map).bindPopup(popup);
         markersRef.current.push(m);
       });
@@ -169,13 +169,13 @@ const App = () => {
       const data = await res.json();
 
       if (!res.ok || !data.redirectUrl) {
-        throw new Error(data.error || "Nepodařilo se vytvořit platbu");
+        throw new Error(data.error || "Nepoda\u0159ilo se vytvo\u0159it platbu");
       }
 
       window.location.href = data.redirectUrl;
 
     } catch (err) {
-      setPaymentError(err.message || "Platba se nezdařila. Zkuste to znovu.");
+      setPaymentError(err.message || "Platba se nezda\u0159ila. Zkuste to znovu.");
       setPaymentLoading(false);
     }
   };
@@ -204,10 +204,9 @@ const App = () => {
     <div style={st.app}><style>{css}</style>
       <div style={{ ...st.detailWrap, opacity: animateIn ? 1 : 0, transform: animateIn ? "translateY(0)" : "translateY(12px)", transition: "all .4s ease" }}>
 
-        {/* UPRAVENO: header se dvěma tlačítky */}
         <div style={st.detailHeader}>
-          <button onClick={goHome} style={st.backBtn}>&#8592; Zpet</button>
-          <button onClick={goHome} style={st.homeBtn}>&#8962; Domu</button>
+          <button onClick={goHome} style={st.backBtn}>&larr; Zpět</button>
+          <button onClick={goHome} style={st.homeBtn}>&#8962; Domů</button>
         </div>
 
         <div style={st.detailHero}>
@@ -225,35 +224,35 @@ const App = () => {
           {["dar", "info"].map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)}
               style={{ ...st.tab, ...(activeTab === tab ? st.tabActive : {}) }}>
-              {tab === "dar" ? "Prispet" : "O farnosti"}
+              {tab === "dar" ? "Přispět" : "O farnosti"}
             </button>
           ))}
         </div>
 
         {activeTab === "dar" ? (
           <div style={st.donateSection}>
-            <p style={st.donateLabel}>Vyberte castku:</p>
+            <p style={st.donateLabel}>Vyberte částku:</p>
             <div style={st.amountGrid}>
               {amounts.map(a => (
                 <button key={a} onClick={() => { setSelectedAmount(a); setCustomAmount(""); setPaymentError(null); }}
                   style={{ ...st.amountBtn, ...(selectedAmount === a ? st.amountBtnActive : {}) }}>
-                  {a} Kc
+                  {a} Kč
                 </button>
               ))}
             </div>
             <div style={st.customRow}>
-              <span style={st.customLabel}>Jina castka:</span>
+              <span style={st.customLabel}>Jiná částka:</span>
               <div style={st.customInputWrap}>
                 <input type="number" placeholder="20" min="20" value={customAmount}
                   onChange={e => { setCustomAmount(e.target.value); setSelectedAmount(null); setPaymentError(null); }}
                   style={st.customInput} />
-                <span style={st.customCurr}>Kc</span>
+                <span style={st.customCurr}>Kč</span>
               </div>
             </div>
 
             {paymentError && (
               <div style={st.errorBox}>
-                ⚠️ {paymentError}
+                &#9888; {paymentError}
               </div>
             )}
 
@@ -263,10 +262,10 @@ const App = () => {
               style={{ ...st.donateBtn, ...(!amountValid || paymentLoading ? st.donateBtnOff : {}) }}
             >
               {paymentLoading
-                ? "Presmerovavam na platebni branu..."
+                ? "Přesměrovávám na platební bránu..."
                 : amountValid
-                  ? `Darovat ${finalAmount} Kc`
-                  : "Minimalni prispevek je 20 Kc"}
+                  ? `Darovat ${finalAmount} Kč`
+                  : "Minimální příspěvek je 20 Kč"}
             </button>
 
             <div style={st.paymentRefBox}>
@@ -274,14 +273,13 @@ const App = () => {
               <span style={st.paymentRefValue}>{getPaymentRef(selectedChurch)}</span>
               <span style={st.paymentRefSub}>— {selectedChurch.name}</span>
             </div>
-            <p style={st.donateNote}>Zabezpecena platba kartou · PayU</p>
+            <p style={st.donateNote}>Zabezpečená platba kartou · PayU</p>
           </div>
         ) : (
           <div style={st.infoSection}>
-            {/* UPRAVENO: odstraněn řádek s Diecézí */}
             {[
-              { icon: "\u{1F464}", label: "Farar", val: selectedChurch.pastor },
-              { icon: "\u{1F550}", label: "Bohosluzby", val: selectedChurch.masses },
+              { icon: "\u{1F464}", label: "Farář", val: selectedChurch.pastor },
+              { icon: "\u{1F550}", label: "Bohoslužby", val: selectedChurch.masses },
               { icon: "\u{1F4CD}", label: "Adresa", val: selectedChurch.address + ", " + selectedChurch.city },
               { icon: "\u{1F310}", label: "Web", val: selectedChurch.web || selectedChurch.phone },
             ].map((item, i) => (
@@ -307,10 +305,10 @@ const App = () => {
       <div style={{ ...st.homeWrap, opacity: animateIn ? 1 : 0, transform: animateIn ? "translateY(0)" : "translateY(12px)", transition: "all .45s ease" }}>
         <div style={st.homeHeader}>
           <div style={st.logo}>&#10013;</div>
-          <h1 style={st.homeTitle}>Farni Dar</h1>
-          <p style={st.homeSub}>Najdete svuj kostel. </p>
+          <h1 style={st.homeTitle}>Farní Dar</h1>
+          <p style={st.homeSub}>Najděte svůj kostel.</p>
           <p style={{ fontSize: 12, color: c.soft, marginTop: 4, padding: "0 24px" }}>
-            Prispejte platbou online misto hotovosti.
+            Přispějte platbou online místo hotovosti.
           </p>
         </div>
         <div style={st.bottomNav}>
@@ -331,14 +329,14 @@ const App = () => {
             {liturgyLoading ? (
               <div style={{ textAlign: "center", padding: "48px 0", color: c.soft }}>
                 <div style={{ fontSize: 32, marginBottom: 12 }}>&#128214;</div>
-                <div>Nacitam cteni pro tuto nedeli...</div>
+                <div>Načítám čtení pro tuto neděli...</div>
               </div>
             ) : liturgyError || !liturgy ? (
               <div style={{ textAlign: "center", padding: "48px 20px", color: c.soft }}>
                 <div style={{ fontSize: 32, marginBottom: 12 }}>&#128591;</div>
-                <div style={{ marginBottom: 16 }}>Cteni se nepodarilo nacist.</div>
+                <div style={{ marginBottom: 16 }}>Čtení se nepodařilo načíst.</div>
                 <a href="https://www.vira.cz/Nedelni-liturgie" target="_blank" rel="noopener noreferrer" style={st.sourceLink}>
-                  Otevrit cteni na vira.cz &#8594;
+                  Otevřít čtení na vira.cz &rarr;
                 </a>
               </div>
             ) : (
@@ -359,7 +357,7 @@ const App = () => {
                           <div style={st.readingType}>{sec.type}</div>
                           <div style={st.readingRef}>{sec.ref}</div>
                         </div>
-                        <div style={st.readingChevron}>{isOpen ? "&#9650;" : "&#9660;"}</div>
+                        <div style={st.readingChevron}>{isOpen ? "\u25B2" : "\u25BC"}</div>
                       </button>
                       {isOpen && (
                         <div style={st.readingBody}>
@@ -372,7 +370,7 @@ const App = () => {
                   );
                 })}
                 <a href="https://www.vira.cz/Nedelni-liturgie" target="_blank" rel="noopener noreferrer" style={st.sourceLink}>
-                  Cela liturgie na vira.cz &#8594;
+                  Celá liturgie na vira.cz &rarr;
                 </a>
               </>
             )}
@@ -380,7 +378,7 @@ const App = () => {
         ) : (
           <>
             <div style={st.searchWrap}>
-              <input type="text" placeholder="Najit kostel nebo mesto..." value={search}
+              <input type="text" placeholder="Najít kostel nebo město..." value={search}
                 onChange={e => setSearch(e.target.value)} style={st.searchInput} />
               {search && <button onClick={() => setSearch("")} style={st.clearBtn}>&#10005;</button>}
             </div>
@@ -397,7 +395,7 @@ const App = () => {
                 {filtered.length === 0 ? (
                   <div style={st.empty}>
                     <p style={{ fontSize: 16 }}>Kostel nenalezen</p>
-                    <p style={{ fontSize: 13, opacity: 0.6, marginTop: 4 }}>Zkuste jiny nazev nebo zadejte mesto</p>
+                    <p style={{ fontSize: 13, opacity: 0.6, marginTop: 4 }}>Zkuste jiný název nebo zadejte město</p>
                   </div>
                 ) : filtered.map((ch, i) => (
                   <button key={ch.id} onClick={() => { setSelectedChurch(ch); setActiveTab("dar"); }}
@@ -409,7 +407,7 @@ const App = () => {
                     </div>
                     <div style={st.cardMeta}>
                       {ch.distance != null && <div style={st.distBadge}>{formatDist(ch.distance)}</div>}
-                      <div style={st.cardArrow}>&#8250;</div>
+                      <div style={st.cardArrow}>&rsaquo;</div>
                     </div>
                   </button>
                 ))}
@@ -419,7 +417,7 @@ const App = () => {
         )}
         <div style={{ textAlign: "center", padding: "16px 20px 8px", borderTop: "1px solid #EDE6DB", marginTop: 8 }}>
           <a href="/jak-to-funguje.html" style={{ fontSize: 12, color: "#7A6E5E", textDecoration: "none", marginRight: 16 }}>Jak to funguje</a>
-          <a href="/podminky.html" style={{ fontSize: 12, color: "#7A6E5E", textDecoration: "none", marginRight: 16 }}>Obchodni podminky</a>
+          <a href="/podminky.html" style={{ fontSize: 12, color: "#7A6E5E", textDecoration: "none", marginRight: 16 }}>Obchodní podmínky</a>
           <a href="/kontakt.html" style={{ fontSize: 12, color: "#7A6E5E", textDecoration: "none" }}>Kontakt</a>
         </div>
       </div>
@@ -484,10 +482,8 @@ const st = {
   cardArrow: { fontSize: 20, color: c.gold, fontWeight: 300 },
   empty: { textAlign: "center", padding: "48px 0", color: c.soft },
   detailWrap: { padding: "0 0 40px" },
-  // UPRAVENO: header je flex row se dvěma tlačítky
   detailHeader: { padding: "16px 20px 0", display: "flex", justifyContent: "space-between", alignItems: "center" },
   backBtn: { background: "none", border: "none", fontSize: 15, color: c.gold, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, padding: "8px 0" },
-  // NOVÉ: tlačítko Domů
   homeBtn: { background: "none", border: "none", fontSize: 15, color: c.gold, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, padding: "8px 0" },
   detailHero: { textAlign: "center", padding: "16px 24px 24px", background: "linear-gradient(180deg, #F5EBD7 0%, #FAF6F1 100%)" },
   detailName: { fontSize: 21, fontWeight: 700, color: c.text, fontFamily: "'Crimson Pro', serif" },
