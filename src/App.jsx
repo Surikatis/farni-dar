@@ -155,24 +155,22 @@ const App = () => {
     setPaymentError(null);
 
     try {
-      const res = await fetch("/api/payu-create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          amount: finalAmount,
-          churchName: selectedChurch.name,
-          churchId: selectedChurch.id,
-          churchCity: selectedChurch.city,
-        }),
-      });
+const res = await fetch("/api/platba", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: finalAmount,
+        churchName: selectedChurch.name,
+      }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (!res.ok || !data.redirectUrl) {
-        throw new Error(data.error || "Nepoda\u0159ilo se vytvo\u0159it platbu");
-      }
+    if (!res.ok || !data.url) {
+      throw new Error(data.error || "Nepodarilo se vytvorit platbu");
+    }
 
-      window.location.href = data.redirectUrl;
+    window.location.href = data.url;
 
     } catch (err) {
       setPaymentError(err.message || "Platba se nezda\u0159ila. Zkuste to znovu.");
