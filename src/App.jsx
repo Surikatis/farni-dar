@@ -271,7 +271,7 @@ const res = await fetch("/api/platba", {
               <span style={st.paymentRefValue}>{getPaymentRef(selectedChurch)}</span>
               <span style={st.paymentRefSub}>— {selectedChurch.name}</span>
             </div>
-            <p style={st.donateNote}>Zabezpečená platba kartou · PayU</p>
+            <p style={st.donateNote}>Zabezpečená platba kartou · Stripe</p>
           </div>
         ) : (
           <div style={st.infoSection}>
