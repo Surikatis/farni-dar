@@ -217,4 +217,34 @@ export const allChurches = [
   // Český Krumlov ⚠️
   { id:99,  name:"Kostel sv. Víta", city:"Český Krumlov", address:"Kostelní ul. 1, Český Krumlov", lat:48.8120, lng:14.3180, diocese:"Diecéze českobudějovická", masses:["Ne 09:00","Ne 18:00","Út Čt Pá 17:30"], pastor:"P. Antonín Hruška", phone:"" },
   { id:100, name:"Kostel Božího Těla (klášter Zlatá Koruna)", city:"Český Krumlov", address:"Zlatá Koruna, Český Krumlov", lat:48.8090, lng:14.3210, diocese:"Diecéze českobudějovická", masses:["Ne 10:30","St 17:00"], pastor:"P. Stanislav Havel", phone:"" },
+  
+  
+  // ═══════════════════════════════════════════════════════════
+  // DIECÉZE PLZEŇSKÁ
+  // ═══════════════════════════════════════════════════════════
+
+  // ═══════════════════════════════════════════════════════════
+  // DIECÉZE PLZEŇSKÁ
+  // ═══════════════════════════════════════════════════════════
+
+  // Plzeň – 5 kostelů ⚠️
+  { id:101, name:"Katedrála sv. Bartoloměje", city:"Plzeň", address:"náměstí Republiky 1, Plzeň", lat:49.7475, lng:13.3776, diocese:"Diecéze plzeňská", masses:["Ne 08:00","Ne 10:00","Ne 18:00","Po–Pá 07:00","Po–Pá 17:30"], pastor:"Mons. Tomáš Holub", phone:"" },
+  { id:102, name:"Kostel sv. Mikuláše (Minorité)", city:"Plzeň", address:"Dominikánská ul. 4, Plzeň", lat:49.7480, lng:13.3760, diocese:"Diecéze plzeňská", masses:["Ne 09:00","Ne 11:00","Pá 17:30"], pastor:"P. Jiří Šlégr OFMConv", phone:"" },
+  { id:103, name:"Kostel Nanebevzetí Panny Marie (Dominikáni)", city:"Plzeň", address:"Rooseveltova ul. 10, Plzeň", lat:49.7490, lng:13.3800, diocese:"Diecéze plzeňská", masses:["Ne 09:30","St 17:00"], pastor:"P. Pavel Bernáth OP", phone:"" },
+  { id:104, name:"Kostel sv. Jiří (Lobzy)", city:"Plzeň", address:"Lobezská ul. 1, Plzeň-Lobzy", lat:49.7380, lng:13.3650, diocese:"Diecéze plzeňská", masses:["Ne 10:30","Čt 17:00"], pastor:"P. Martin Horáček", phone:"" },
+  { id:105, name:"Kostel sv. Kříže (Litice)", city:"Plzeň", address:"Lítická ul. 2, Plzeň-Litice", lat:49.7310, lng:13.3200, diocese:"Diecéze plzeňská", masses:["Ne 09:00","Pá 17:00"], pastor:"P. Ondřej Vácha", phone:"" },
+
+  // Karlovy Vary ⚠️
+  { id:106, name:"Kostel sv. Máří Magdalény", city:"Karlovy Vary", address:"náměstí Svobody 1, Karlovy Vary", lat:50.2304, lng:12.8710, diocese:"Diecéze plzeňská", masses:["Ne 09:00","Ne 18:00","Út Čt Pá 17:30"], pastor:"P. Pavel Hofírek", phone:"" },
+  { id:107, name:"Kostel sv. Ondřeje (Rybáře)", city:"Karlovy Vary", address:"Ondřejská ul. 3, Karlovy Vary-Rybáře", lat:50.2270, lng:12.8760, diocese:"Diecéze plzeňská", masses:["Ne 10:30","St 17:00"], pastor:"P. Pavel Hofírek", phone:"" },
+
+  // Klatovy ⚠️
+  { id:108, name:"Kostel Neposkvrněného Početí PM (Jezuité)", city:"Klatovy", address:"náměstí Míru 1, Klatovy", lat:49.3954, lng:13.2950, diocese:"Diecéze plzeňská", masses:["Ne 09:00","Ne 18:00","Út Čt Pá 17:30"], pastor:"P. Vojtěch Novák SJ", phone:"" },
+  { id:109, name:"Kostel sv. Mauricia", city:"Klatovy", address:"Randova ul. 2, Klatovy", lat:49.3930, lng:13.2980, diocese:"Diecéze plzeňská", masses:["Ne 10:30","Pá 17:00"], pastor:"P. Vojtěch Novák SJ", phone:"" },
+
+  // Cheb ⚠️
+  { id:110, name:"Kostel sv. Mikuláše a Alžběty", city:"Cheb", address:"náměstí Krále Jiřího z Poděbrad 1, Cheb", lat:50.0797, lng:12.3726, diocese:"Diecéze plzeňská", masses:["Ne 09:00","Ne 18:00","Út Čt Pá 17:30"], pastor:"P. Radek Jurnečka", phone:"" },
+
+  //Stod chtěl Aleš Čech
+    { id:111, name:"Kostel sv. Máří Magdaleny", city:"Stod", address:"náměstí 1, Stod", lat:49.6463, lng:13.1640, diocese:"Diecéze plzeňská", masses:["Ne 09:00","Pá 17:00"], pastor:"P. Jiří Pařík", phone:"" },
 ];
