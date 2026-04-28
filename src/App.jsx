@@ -199,7 +199,7 @@ const res = await fetch("/api/platba", {
 
   if (selectedChurch) return (
     <div style={st.app}><style>{css}</style>
-      <div style={{ ...st.detailWrap, opacity: animateIn ? 1 : 0, transform: animateIn ? "translateY(0)" : "translateY(12px)", transition: "all .4s ease" }}>
+      <div style={{ ...st.detailWrap }}>
 
         <div style={st.detailHeader}>
           <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); goHome(); }} style={st.backBtn}>&larr; Zpět</button>
