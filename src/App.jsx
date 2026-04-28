@@ -427,6 +427,7 @@ const css = `
 @keyframes loaderGrow { from { width: 0%; } to { width: 100%; } }
 @keyframes gentleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; cursor: pointer; }
 input[type=number] { -moz-appearance: textfield; }
 .leaflet-popup-content-wrapper { border-radius: 12px !important; }
 `;
