@@ -63,11 +63,11 @@ const App = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (p) => setUserLoc({ lat: p.coords.latitude, lng: p.coords.longitude }),
-        () => setUserLoc({ lat: 50.176, lng: 14.867 }),
+        () => setUserLoc(null),
         { timeout: 8000 }
       );
     } else {
-      setUserLoc({ lat: 50.176, lng: 14.867 });
+      setUserLoc(null);
     }
   }, []);
 
