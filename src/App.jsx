@@ -333,14 +333,12 @@ const res = await fetch("/api/platba", {
               <div style={{ textAlign: "center", padding: "48px 20px", color: c.soft }}>
                 <div style={{ fontSize: 32, marginBottom: 12 }}>&#128591;</div>
                 <div style={{ marginBottom: 16 }}>Čtení se nepodařilo načíst.</div>
-                <a href="https://www.vira.cz/Nedelni-liturgie" target="_blank" rel="noopener noreferrer" style={st.sourceLink}>
-                  Otevřít čtení na vira.cz &rarr;
-                </a>
+               
               </div>
             ) : (
               <>
                 <div style={st.liturgyHeader}>
-                  <div style={st.liturgyColorDot} />
+              
                   <div>
                     <div style={st.liturgyTitle}>{liturgy.title}</div>
                     {liturgy.date ? <div style={st.liturgyDate}>{liturgy.date}</div> : null}
@@ -367,9 +365,7 @@ const res = await fetch("/api/platba", {
                     </div>
                   );
                 })}
-                <a href="https://www.vira.cz/Nedelni-liturgie" target="_blank" rel="noopener noreferrer" style={st.sourceLink}>
-                  Celá liturgie na vira.cz &rarr;
-                </a>
+                
               </>
             )}
           </div>
