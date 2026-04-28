@@ -420,15 +420,16 @@ const res = await fetch("/api/platba", {
 };
 
 const css = `
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap&font-display=swap');
 * { box-sizing: border-box; margin: 0; padding: 0; }
+* { font-display: swap; }
 @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes splashPulse { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.08); opacity: 1; } }
 @keyframes loaderGrow { from { width: 0%; } to { width: 100%; } }
 @keyframes gentleFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; cursor: pointer; }
 input[type=number] { -moz-appearance: textfield; }
+button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; cursor: pointer; }
 .leaflet-popup-content-wrapper { border-radius: 12px !important; }
 `;
 
