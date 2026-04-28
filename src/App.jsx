@@ -90,10 +90,11 @@ const App = () => {
     ? allChurches.map(ch => ({ ...ch, distance: getDistance(userLoc.lat, userLoc.lng, ch.lat, ch.lng) })).sort((a, b) => a.distance - b.distance)
     : allChurches.map(ch => ({ ...ch, distance: null }));
 
-  const filtered = churches.filter(c =>
-    c.name.toLowerCase().includes(search.toLowerCase()) ||
-    c.city.toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = churches.filter(c => {
+    const q = search.trim().toLowerCase();
+    if (!q) return true;
+    return c.name.toLowerCase().includes(q) || c.city.toLowerCase().includes(q);
+  });
 
   useEffect(() => {
     if (viewMode !== "map" || !mapRef.current || !userLoc || mainTab !== "kostely" || selectedChurch) return;
@@ -203,8 +204,7 @@ const res = await fetch("/api/platba", {
       <div style={{ ...st.detailWrap, opacity: animateIn ? 1 : 0, transform: animateIn ? "translateY(0)" : "translateY(12px)", transition: "all .4s ease" }}>
 
         <div style={st.detailHeader}>
-          <button onClick={goHome} style={st.backBtn}>&larr; Zpět</button>
-          <button onClick={goHome} style={st.homeBtn}>&#8962; Domů</button>
+          <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); goHome(); }} style={st.backBtn}>&larr; Zpět</button>
         </div>
 
         <div style={st.detailHero}>
@@ -304,9 +304,9 @@ const res = await fetch("/api/platba", {
         <div style={st.homeHeader}>
           <div style={st.logo}>&#10013;</div>
           <h1 style={st.homeTitle}>Farní Dar</h1>
-          <p style={st.homeSub}>Najděte svůj kostel.</p>
+         <p style={st.homeSub}>Digitální sbírka pro vaši farnost.</p>
           <p style={{ fontSize: 12, color: c.soft, marginTop: 4, padding: "0 24px" }}>
-            Přispějte platbou online místo hotovosti.
+            Přispějte kartou místo hotovosti — jednoduše a bezpečně.
           </p>
         </div>
         <div style={st.bottomNav}>
@@ -461,7 +461,7 @@ const st = {
   navIcon: { fontSize: 22 },
   navLabel: { fontSize: 12, fontWeight: 600, color: c.soft },
   searchWrap: { margin: "0 20px 12px", position: "relative" },
-  searchInput: { width: "100%", padding: "13px 16px", fontSize: 15, border: "1.5px solid #EDE6DB", borderRadius: 14, outline: "none", background: c.card, color: c.text, fontFamily: "'DM Sans', sans-serif" },
+  searchInput: { width: "100%", padding: "13px 16px", fontSize: 16, border: "1.5px solid #EDE6DB", borderRadius: 14, outline: "none", background: c.card, color: c.text, fontFamily: "'DM Sans', sans-serif", WebkitAppearance: "none", appearance: "none" },
   clearBtn: { position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", fontSize: 16, color: c.soft, cursor: "pointer" },
   toggleRow: { display: "flex", gap: 8, margin: "0 20px 16px" },
   toggleBtn: { flex: 1, padding: "10px 0", fontSize: 14, fontWeight: 500, background: c.card, border: "1.5px solid #EDE6DB", borderRadius: 10, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", color: c.soft, transition: "all .2s" },
@@ -481,7 +481,7 @@ const st = {
   empty: { textAlign: "center", padding: "48px 0", color: c.soft },
   detailWrap: { padding: "0 0 40px" },
   detailHeader: { padding: "16px 20px 0", display: "flex", justifyContent: "space-between", alignItems: "center" },
-  backBtn: { background: "none", border: "none", fontSize: 15, color: c.gold, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, padding: "8px 0" },
+  backBtn: { background: "none", border: "none", fontSize: 15, color: c.gold, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, padding: "12px 0", WebkitTapHighlightColor: "transparent", touchAction: "manipulation" },
   homeBtn: { background: "none", border: "none", fontSize: 15, color: c.gold, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, padding: "8px 0" },
   detailHero: { textAlign: "center", padding: "16px 24px 24px", background: "linear-gradient(180deg, #F5EBD7 0%, #FAF6F1 100%)" },
   detailName: { fontSize: 21, fontWeight: 700, color: c.text, fontFamily: "'Crimson Pro', serif" },
