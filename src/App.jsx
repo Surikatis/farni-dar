@@ -80,9 +80,7 @@ const App = () => {
 
   useEffect(() => {
     if (screen !== "splash") {
-      setAnimateIn(false);
-      const t = setTimeout(() => setAnimateIn(true), 50);
-      return () => clearTimeout(t);
+      setAnimateIn(true);
     }
   }, [screen, selectedChurch]);
 
