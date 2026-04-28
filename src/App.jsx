@@ -84,7 +84,7 @@ const App = () => {
       const t = setTimeout(() => setAnimateIn(true), 50);
       return () => clearTimeout(t);
     }
-  }, [screen, selectedChurch, mainTab]);
+  }, [screen, selectedChurch]);
 
   const churches = userLoc
     ? allChurches.map(ch => ({ ...ch, distance: getDistance(userLoc.lat, userLoc.lng, ch.lat, ch.lng) })).sort((a, b) => a.distance - b.distance)
