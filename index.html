@@ -35,7 +35,10 @@
       document.addEventListener('touchend', function(e) {
         var diff = Math.abs(e.changedTouches[0].clientY - touchStartY);
         if (diff < 10) {
-          if (e.target.tagName === 'INPUT') return;
+          if (e.target.tagName === 'INPUT') {
+            e.target.focus();
+            return;
+          }
           e.preventDefault();
           e.target.click();
         }
