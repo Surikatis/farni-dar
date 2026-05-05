@@ -73,7 +73,7 @@ const App = () => {
 
   useEffect(() => {
     if (screen === "splash") {
-      const t = setTimeout(() => { setScreen("home"); setTimeout(() => setAnimateIn(true), 50); }, 2200);
+      const t = setTimeout(() => { setScreen("home"); setAnimateIn(true); }, 2200);
       return () => clearTimeout(t);
     }
   }, [screen]);
