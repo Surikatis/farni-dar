@@ -27,7 +27,7 @@
   <body style="margin:0;background:#FAF6F1">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script>
+  <script>
       var touchStartY = 0;
       document.addEventListener('touchstart', function(e) {
         touchStartY = e.touches[0].clientY;
@@ -35,6 +35,7 @@
       document.addEventListener('touchend', function(e) {
         var diff = Math.abs(e.changedTouches[0].clientY - touchStartY);
         if (diff < 10) {
+          if (e.target.tagName === 'INPUT') return;
           e.preventDefault();
           e.target.click();
         }
