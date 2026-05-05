@@ -28,7 +28,7 @@ const App = () => {
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [customAmount, setCustomAmount] = useState("");
   const [activeTab, setActiveTab] = useState("dar");
-  const [animateIn, setAnimateIn] = useState(false);
+  const [animateIn, setAnimateIn] = useState(true);
   const [userLoc, setUserLoc] = useState(null);
   const [viewMode, setViewMode] = useState("list");
   const [expandedReading, setExpandedReading] = useState(null);
@@ -73,7 +73,7 @@ const App = () => {
 
   useEffect(() => {
     if (screen === "splash") {
-      const t = setTimeout(() => { setScreen("home"); setAnimateIn(true); }, 1500);
+      const t = setTimeout(() => { setScreen("home"); }, 1500);
       return () => clearTimeout(t);
     }
   }, [screen]);
