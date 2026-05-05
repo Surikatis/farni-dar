@@ -374,7 +374,7 @@ const App = () => {
               <button onClick={() => setViewMode("list")}
                 style={{ ...st.toggleBtn, ...(viewMode === "list" ? st.toggleOn : {}) }}>Seznam</button>
               <button onClick={() => setViewMode("map")}
-                style={{ ...st.toggleBtn, ...(viewMode === "map" ? st.toggleOn : {}) }}>Mapa</button>
+                style={{ ...st.toggleBtn, ...(viewMode === "map" ? st.toggleOn : {}) }}>Mapa okolí</button>
             </div>
             {viewMode === "map" ? (
               <div style={st.mapBox}><div ref={mapRef} style={st.mapInner} /></div>
