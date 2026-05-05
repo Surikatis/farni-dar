@@ -277,7 +277,7 @@ const res = await fetch("/api/platba", {
               { icon: "\u{1F464}", label: "Farář", val: selectedChurch.pastor },
               { icon: "\u{1F550}", label: "Bohoslužby", val: selectedChurch.masses },
               { icon: "\u{1F4CD}", label: "Adresa", val: selectedChurch.address + ", " + selectedChurch.city },
-              { icon: "\u{1F310}", label: "Web", val: selectedChurch.web || selectedChurch.phone },
+           // tady je pole kde se původně zobrazoval web   { icon: "\u{1F310}", label: "Web", val: selectedChurch.web || selectedChurch.phone },
             ].map((item, i) => (
               <div key={i} style={st.infoCard}>
                 <div style={st.infoIcon}>{item.icon}</div>
