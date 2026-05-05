@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { allChurches } from "./churches.js";
 
@@ -187,12 +188,12 @@ const res = await fetch("/api/platba", {
   };
 
   if (screen === "splash") return (
-    <div style={st.splashWrap}><style>{css}</style>
+    <div style={st.splashWrap} onClick={() => { setScreen("home"); setAnimateIn(true); }}><style>{css}</style>
       <div style={st.splashContent}>
         <div style={st.splashIcon}>&#10013;</div>
         <div style={st.splashTitle}>Farní Dar</div>
         <div style={st.splashSub}>Podpořte svou farnost</div>
-        <div style={st.splashLoader}><div style={st.splashLoaderBar} /></div>
+        <div style={{ marginTop: 24, fontSize: 13, color: "#E8D5B8", fontFamily: "'DM Sans', sans-serif", opacity: 0.7 }}>Klepněte pro vstup</div>
       </div>
     </div>
   );
